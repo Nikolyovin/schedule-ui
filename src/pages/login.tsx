@@ -1,17 +1,8 @@
-import LoginForm from '@/components/LoginForm'
-import { Row, Col, Card } from 'antd'
+import Login from '@/components/Login/Login'
 import React from 'react'
 
 const login = () => {
-  return (
-    <Row align='middle' justify={'center'} className='h-screen '>
-      <Col>
-        <Card>
-          <LoginForm />
-        </Card>
-      </Col>
-    </Row>
-  )
+  return <Login />
 }
 
 export default login
