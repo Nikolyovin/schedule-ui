@@ -3,9 +3,7 @@ import { useRouter } from 'next/router'
 import React from 'react'
 import { LockOutlined, UserOutlined } from '@ant-design/icons'
 
-const LoginForm = () => {
-  const router = useRouter()
-
+const FormCreateEntry = () => {
   const onFinish = (values: any) => {
     console.log('Success:', values)
   }
@@ -41,31 +39,8 @@ const LoginForm = () => {
           placeholder='Пароль'
         />
       </Form.Item>
-
-      <Row justify={'center'}>
-        <Form.Item wrapperCol={{ span: 18 }}>
-          <Button
-            type='primary'
-            htmlType='submit'
-            onClick={() => {
-              router.push({
-                pathname: '/',
-              })
-            }}
-          >
-            Войти
-          </Button>
-        </Form.Item>
-      </Row>
-      <Row justify={'center'}>
-        <Form.Item wrapperCol={{ span: 18 }}>
-          <Button type='link' htmlType='button'>
-            зарегистрироваться
-          </Button>
-        </Form.Item>
-      </Row>
     </Form>
   )
 }
 
-export default LoginForm
+export default FormCreateEntry

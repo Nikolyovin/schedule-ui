@@ -1,5 +1,6 @@
 import { Button, Calendar, Layout, Modal } from 'antd'
 import React, { useState } from 'react'
+import FormCreateEntry from './ModalCreateEntry/FormCreateEntry/FormCreateEntry'
 
 const Content = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -30,9 +31,7 @@ const Content = () => {
         onOk={handleOk}
         onCancel={handleCancel}
       >
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
+        <FormCreateEntry />
       </Modal>
     </Layout.Content>
   )
