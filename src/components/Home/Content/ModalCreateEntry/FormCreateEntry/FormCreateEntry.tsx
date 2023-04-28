@@ -17,26 +17,26 @@ const FormCreateEntry = () => {
       wrapperCol={{ span: 16 }}
     >
       <Form.Item
-        label='Логин'
-        name='username'
-        rules={[{ required: true, message: 'Пожалуйста введите свой логин!' }]}
+        label='Имя клиента'
+        name='client name'
+        rules={[{ required: true, message: 'Пожалуйста укажите имя клиента!' }]}
       >
         <Input
           autoComplete='off'
-          prefix={<UserOutlined className='site-form-item-icon' />}
-          placeholder='Логин'
+          // prefix={<UserOutlined className='site-form-item-icon' />}
+          placeholder='Имя клиента'
         />
       </Form.Item>
 
       <Form.Item
-        label='Пароль'
-        name='password'
-        rules={[{ required: true, message: 'Пожалуйста введите пароль!' }]}
+        label='Описание'
+        name='description'
+        // rules={[{ required: true, message: 'Пожалуйста введите пароль!' }]}
       >
         <Input.Password
           autoComplete='off'
-          prefix={<LockOutlined className='site-form-item-icon' />}
-          placeholder='Пароль'
+          // prefix={<LockOutlined className='site-form-item-icon' />}
+          placeholder='Описание'
         />
       </Form.Item>
     </Form>

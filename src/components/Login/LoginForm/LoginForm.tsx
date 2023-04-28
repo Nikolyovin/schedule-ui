@@ -2,11 +2,12 @@ import { Button, Form, Input, Row } from 'antd'
 import { useRouter } from 'next/router'
 import React from 'react'
 import { LockOutlined, UserOutlined } from '@ant-design/icons'
+import { ILoginForm } from '@/models/models'
 
 const LoginForm = () => {
   const router = useRouter()
 
-  const onFinish = (values: any) => {
+  const onFinish = (values: ILoginForm) => {
     console.log('Success:', values)
   }
 
@@ -14,7 +15,7 @@ const LoginForm = () => {
     <Form
       onFinish={onFinish}
       name='login'
-      style={{ maxWidth: 1200 }}
+      style={{ maxWidth: 1200, marginBottom: 0 }}
       labelCol={{ span: 8 }}
       wrapperCol={{ span: 16 }}
     >
@@ -59,7 +60,15 @@ const LoginForm = () => {
       </Row>
       <Row justify={'center'}>
         <Form.Item wrapperCol={{ span: 18 }}>
-          <Button type='link' htmlType='button'>
+          <Button
+            type='link'
+            htmlType='button'
+            onClick={() => {
+              router.push({
+                pathname: '/registration',
+              })
+            }}
+          >
             зарегистрироваться
           </Button>
         </Form.Item>
