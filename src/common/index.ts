@@ -1,4 +1,5 @@
-import { ISelectColor } from '@/models/models'
+import { IItemDropdown, ISelectColor } from '@/models/models'
+import { MenuProps } from 'antd'
 
 export const COLORS: ISelectColor[] = [
   { label: 'Dust Red', value: '#ff4d4f' },
@@ -29,3 +30,5 @@ export const COLORS: ISelectColor[] = [
   { label: 'Magenta(light)', value: '#f759ab' },
   { label: 'Magenta(dark)', value: '#c41d7f' },
 ]
+
+export const URL_SERVER = 'http://95.83.149.6:5100/'

@@ -1,7 +1,7 @@
 import { COLORS } from '@/common'
 import { IRegistrationForm } from '@/models/models'
-import { LockOutlined, UserOutlined } from '@ant-design/icons'
-import { Button, Form, Input, Row, Select } from 'antd'
+import { LockOutlined, UploadOutlined, UserOutlined } from '@ant-design/icons'
+import { Button, Form, Input, Row, Select, Upload } from 'antd'
 import { useRouter } from 'next/router'
 import { FC, useState } from 'react'
 
@@ -11,14 +11,20 @@ const RegistrationForm: FC = () => {
 
   const onFinish = (values: IRegistrationForm) => {
     console.log('Success:', { ...values, color })
-    router.push({
-      pathname: '/login',
-    })
+    // router.push({
+    //   pathname: '/login',
+    // })
   }
-  console.log('color:', color)
   const handleChange = (value: string) => {
-    console.log(`selected ${value}`)
     setColor(value)
+  }
+
+  //need for upload
+  const getFile = (e) => {
+    if (Array.isArray(e)) {
+      return e
+    }
+    return e && e.fileList
   }
 
   return (
@@ -63,6 +69,19 @@ const RegistrationForm: FC = () => {
           prefix={<LockOutlined className='site-form-item-icon' />}
           placeholder='Пароль'
         />
+      </Form.Item>
+
+      <Form.Item
+        label='Аватар'
+        name='picture'
+        // valuePropName='fileList'
+        // getValueFromEvent={getFile}
+        // rules={[{ required: true, message: 'Пожалуйста введите пароль!' }]}
+      >
+        {/* <UploadForm /> */}
+        <Upload maxCount={1}>
+          <Button icon={<UploadOutlined />}>Click</Button>
+        </Upload>
       </Form.Item>
 
       {/* <div className='w-full flex items-center'>

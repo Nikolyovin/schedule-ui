@@ -14,3 +14,17 @@ export interface ISelectColor {
   value: string
   label: string
 }
+
+export interface IUser {
+  login: string
+  password: string
+  name: string
+  color?: string
+  picture?: string
+  _id: string
+}
+
+export interface IItemDropdown {
+  key: string
+  label: string
+}
