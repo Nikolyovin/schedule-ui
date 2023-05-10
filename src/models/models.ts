@@ -16,7 +16,7 @@ export interface ISelectColor {
 }
 
 export interface IUser {
-  login: string
+  username: string
   password: string
   name: string
   color?: string
@@ -27,4 +27,12 @@ export interface IUser {
 export interface IItemDropdown {
   key: string
   label: string
+}
+
+export interface ICreateUser {
+  login: string
+  password: string
+  name: string
+  color?: string
+  picture?: string
 }

@@ -1,4 +1,6 @@
 import { COLORS } from '@/common'
+import { useActions } from '@/hooks/actions'
+import { useAppSelector } from '@/hooks/redux'
 import { IRegistrationForm } from '@/models/models'
 import { LockOutlined, UploadOutlined, UserOutlined } from '@ant-design/icons'
 import { Button, Form, Input, Row, Select, Upload } from 'antd'
@@ -6,11 +8,15 @@ import { useRouter } from 'next/router'
 import { FC, useState } from 'react'
 
 const RegistrationForm: FC = () => {
-  const [color, setColor] = useState<string | null>()
+  const [color, setColor] = useState<string>('white')
+  const { createUserFetch } = useActions()
+  const {} = useAppSelector((state) => state.registration)
   const router = useRouter()
 
   const onFinish = (values: IRegistrationForm) => {
     console.log('Success:', { ...values, color })
+    createUserFetch({ ...values, color })
+
     // router.push({
     //   pathname: '/login',
     // })
@@ -20,17 +26,17 @@ const RegistrationForm: FC = () => {
   }
 
   //need for upload
-  const getFile = (e) => {
-    if (Array.isArray(e)) {
-      return e
-    }
-    return e && e.fileList
-  }
+  // const getFile = (e) => {
+  //   if (Array.isArray(e)) {
+  //     return e
+  //   }
+  //   return e && e.fileList
+  // }
 
   return (
     <Form
       onFinish={onFinish}
-      name='login'
+      name='registration'
       style={{ maxWidth: 1200 }}
       labelCol={{ span: 8 }}
       wrapperCol={{ span: 16 }}
@@ -49,7 +55,7 @@ const RegistrationForm: FC = () => {
 
       <Form.Item
         label='Имя'
-        name='firstName'
+        name='name'
         rules={[{ required: true, message: 'Пожалуйста укажите своё имя!' }]}
       >
         <Input
@@ -78,10 +84,10 @@ const RegistrationForm: FC = () => {
         // getValueFromEvent={getFile}
         // rules={[{ required: true, message: 'Пожалуйста введите пароль!' }]}
       >
-        {/* <UploadForm /> */}
-        <Upload maxCount={1}>
+        <Upload maxCount={1} listType={'picture'} withCredentials>
           <Button icon={<UploadOutlined />}>Click</Button>
         </Upload>
+        {/* <input type='file' name='picture' /> */}
       </Form.Item>
 
       {/* <div className='w-full flex items-center'>

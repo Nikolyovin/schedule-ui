@@ -31,4 +31,6 @@ export const COLORS: ISelectColor[] = [
   { label: 'Magenta(dark)', value: '#c41d7f' },
 ]
 
-export const URL_SERVER = 'http://95.83.149.6:5100/'
+// export const URL_SERVER = 'http://95.83.149.6:5100/'
+
+export const URL_SERVER = 'http://localhost:5100/'
