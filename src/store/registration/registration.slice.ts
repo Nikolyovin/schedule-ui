@@ -4,11 +4,13 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 interface InitialStateType {
   isLoading: boolean
   createUser: ICreateUser
+  isPush: boolean
 }
 
 const initialState: InitialStateType = {
   isLoading: false,
   createUser: {} as ICreateUser,
+  isPush: false,
 }
 
 export const registrationSlice = createSlice({
@@ -22,6 +24,9 @@ export const registrationSlice = createSlice({
     },
     createUserSuccess(state) {
       state.isLoading = false
+    },
+    isPushChange(state, action: PayloadAction<boolean>) {
+      state.isPush = action.payload
     },
   },
 })

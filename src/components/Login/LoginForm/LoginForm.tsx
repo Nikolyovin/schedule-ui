@@ -9,25 +9,29 @@ import { useActions } from '@/hooks/actions'
 const LoginForm: FC = () => {
   const router = useRouter()
   const [error, setError] = useState<boolean>(false)
+  const [isLoadingLogin, setIsLoadingLogin] = useState<boolean>(false)
 
   const { users, isLoading } = useAppSelector((state) => state.login)
+  console.log('isLoadingLogin', isLoadingLogin)
 
-  const { getUsersFetch, setActiveUser } = useActions()
+  const { getUsersFetch, setActiveUser, isPushChange } = useActions()
 
   useEffect(() => {
     getUsersFetch()
+    isPushChange(false)
   }, [])
 
   const onFinish = (values: ILoginForm) => {
     if (!isLoading && users.length > 0) {
-      console.log('users:', users)
+      // console.log('users:', users)
       const login = users.find(
         (user) =>
           user.login === values.username && user.password === values.password
       )
-      console.log('login:', login)
+      // console.log('login:', login)
       if (!login) setError(true)
       if (login) {
+        setIsLoadingLogin(true)
         setActiveUser(login)
         setError(false)
         router.push({
@@ -35,6 +39,7 @@ const LoginForm: FC = () => {
         })
       }
     }
+    // setIsLoadingLogin(false)
   }
 
   return (
@@ -82,6 +87,7 @@ const LoginForm: FC = () => {
             <Button
               type='primary'
               htmlType='submit'
+              loading={isLoadingLogin}
               // onClick={() => {
               //   router.push({
               //     pathname: '/',

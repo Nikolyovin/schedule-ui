@@ -31,6 +31,10 @@ export const loginSlice = createSlice({
       state.users = action.payload
       state.isLoading = false
     },
+    setIsLoadingLogin(state, action: PayloadAction<boolean>) {
+      state.isLoading = action.payload
+      console.log('Я в диспатче: ')
+    },
   },
 })
 
