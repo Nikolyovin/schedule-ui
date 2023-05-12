@@ -1,4 +1,12 @@
-import { Button, Form, Input, Row } from 'antd'
+import {
+  Button,
+  DatePicker,
+  Form,
+  Input,
+  InputNumber,
+  Row,
+  TimePicker,
+} from 'antd'
 import { useRouter } from 'next/router'
 import React from 'react'
 import { LockOutlined, UserOutlined } from '@ant-design/icons'
@@ -7,6 +15,9 @@ const FormCreateEntry = () => {
   const onFinish = (values: any) => {
     console.log('Success:', values)
   }
+
+  const { RangePicker } = DatePicker
+  const { TextArea } = Input
 
   return (
     <Form
@@ -29,16 +40,47 @@ const FormCreateEntry = () => {
       </Form.Item>
 
       <Form.Item
+        label='Дата сеанса'
+        name='date'
+        rules={[{ required: true, message: 'Укажите дату сеанса!' }]}
+      >
+        <DatePicker />
+      </Form.Item>
+      <Form.Item
+        label='Время сеанса'
+        name='time'
+        rules={[{ required: true, message: 'Укажите время сеанса!' }]}
+      >
+        <TimePicker />
+      </Form.Item>
+
+      <Form.Item
+        label='Продолжительность'
+        name='duration'
+        rules={[
+          { required: true, message: 'Укажите продолжительность часов!' },
+        ]}
+      >
+        <InputNumber min={1} max={12} />
+      </Form.Item>
+
+      <Form.Item
         label='Описание'
         name='description'
         // rules={[{ required: true, message: 'Пожалуйста введите пароль!' }]}
       >
-        <Input.Password
-          autoComplete='off'
-          // prefix={<LockOutlined className='site-form-item-icon' />}
+        <TextArea
+          // autoComplete='off'
           placeholder='Описание'
         />
       </Form.Item>
+      <Row justify={'center'}>
+        <Form.Item>
+          <Button type='primary' htmlType='submit'>
+            Создать
+          </Button>
+        </Form.Item>
+      </Row>
     </Form>
   )
 }

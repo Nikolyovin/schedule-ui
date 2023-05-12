@@ -26,10 +26,12 @@ const Content = () => {
         </Button>
       </div>
       <Modal
-        title='Basic Modal'
+        // title='Basic Modal'
         open={isModalOpen}
-        onOk={handleOk}
+        // onOk={handleOk}
         onCancel={handleCancel}
+        footer={null}
+        centered
       >
         <FormCreateEntry />
       </Modal>
