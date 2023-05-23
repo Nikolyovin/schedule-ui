@@ -1,5 +1,5 @@
 import { URL_SERVER } from '@/common'
-import { call, put, takeEvery } from 'redux-saga/effects'
+import { call, put, takeEvery, takeLatest } from 'redux-saga/effects'
 import { PayloadAction } from '@reduxjs/toolkit'
 import { ICreateUser } from '@/models/models'
 import { registrationActions } from './registration.slice'
@@ -12,7 +12,6 @@ function* workCreateUser({ payload }: PayloadAction<ICreateUser>): any {
   formData.append('name', payload.name)
   formData.append('password', payload.password)
   formData.append('color', payload.color)
-  console.log('formData', formData)
 
   const response = yield call(() =>
     fetch(`${URL_SERVER}api/users`, {
@@ -26,7 +25,7 @@ function* workCreateUser({ payload }: PayloadAction<ICreateUser>): any {
 }
 
 function* registrationSaga() {
-  yield takeEvery('registration/createUserFetch', workCreateUser) //имя слайса слэш название редьюсера
+  yield takeLatest('registration/createUserFetch', workCreateUser) //имя слайса слэш название редьюсера
 }
 
 export default registrationSaga

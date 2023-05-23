@@ -6,6 +6,7 @@ interface InitialStateType {
   users: IUser[]
   isLoading: boolean
   activeUser: IUser
+  // currentUser: string
 }
 
 const initialState: InitialStateType = {
@@ -13,6 +14,7 @@ const initialState: InitialStateType = {
   users: {} as IUser[],
   isLoading: false,
   activeUser: {} as IUser,
+  // currentUser: '',
 }
 
 export const loginSlice = createSlice({
@@ -26,15 +28,15 @@ export const loginSlice = createSlice({
       state.isLoading = true
     },
     getUsersSuccess(state, action: PayloadAction<IUser[]>) {
-      console.log('action.payload:', action.payload)
-
       state.users = action.payload
       state.isLoading = false
     },
     setIsLoadingLogin(state, action: PayloadAction<boolean>) {
       state.isLoading = action.payload
-      console.log('Я в диспатче: ')
     },
+    // setCurrentUser(state, action: PayloadAction<string>) {
+    //   state.currentUser = action.payload
+    // },
   },
 })
 

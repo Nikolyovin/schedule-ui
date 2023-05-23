@@ -36,3 +36,22 @@ export interface ICreateUser {
   color?: string
   picture?: string
 }
+
+export interface ICreateEntry {
+  master: string
+  clientName: string
+  date: Date
+  time: Date
+  duration: number
+  description: string
+}
+
+export interface IEntry {
+  master: string
+  _id: string
+  clientName: string
+  date: Date
+  time: Date
+  duration: number
+  description: string
+}

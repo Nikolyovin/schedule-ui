@@ -10,13 +10,19 @@ import {
 import { useRouter } from 'next/router'
 import React from 'react'
 import { LockOutlined, UserOutlined } from '@ant-design/icons'
+import { ICreateEntry } from '@/models/models'
+import { useActions } from '@/hooks/actions'
+import { useAppSelector } from '@/hooks/redux'
 
 const FormCreateEntry = () => {
-  const onFinish = (values: any) => {
-    console.log('Success:', values)
+  const { createEntryFetch } = useActions()
+  const { activeUser } = useAppSelector((state) => state.login)
+
+  const onFinish = (values: ICreateEntry) => {
+    createEntryFetch({ ...values, master: activeUser._id })
+    // console.log('Success:', values)
   }
 
-  const { RangePicker } = DatePicker
   const { TextArea } = Input
 
   return (
@@ -29,7 +35,7 @@ const FormCreateEntry = () => {
     >
       <Form.Item
         label='Имя клиента'
-        name='client name'
+        name='clientName'
         rules={[{ required: true, message: 'Пожалуйста укажите имя клиента!' }]}
       >
         <Input
@@ -55,7 +61,7 @@ const FormCreateEntry = () => {
       </Form.Item>
 
       <Form.Item
-        label='Продолжительность'
+        label='Продолжительность(в часах)'
         name='duration'
         rules={[
           { required: true, message: 'Укажите продолжительность часов!' },

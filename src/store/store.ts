@@ -1,11 +1,9 @@
 import createSagaMiddleware from 'redux-saga'
 import { configureStore } from '@reduxjs/toolkit'
-// import letterSaga from './alphabet/alphabet.saga'
 import { loginReducer } from './login/login.slice'
-import loginSaga from './login/login.saga'
 import { registrationReducer } from './registration/registration.slice'
-import registrationSaga from './registration/registration.saga'
 import rootSaga from './rootSaga'
+import { entriesReducer } from './entries/entries.slice'
 
 const saga = createSagaMiddleware()
 
@@ -13,6 +11,7 @@ export const store = configureStore({
   reducer: {
     login: loginReducer,
     registration: registrationReducer,
+    entries: entriesReducer,
   },
   middleware: [saga],
 })
