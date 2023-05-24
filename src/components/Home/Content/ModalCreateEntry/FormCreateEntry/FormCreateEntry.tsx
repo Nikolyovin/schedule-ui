@@ -15,11 +15,12 @@ import { useActions } from '@/hooks/actions'
 import { useAppSelector } from '@/hooks/redux'
 
 const FormCreateEntry = () => {
-  const { createEntryFetch } = useActions()
+  const { createEntryFetch, setIsFetching } = useActions()
   const { activeUser } = useAppSelector((state) => state.login)
 
   const onFinish = (values: ICreateEntry) => {
     createEntryFetch({ ...values, master: activeUser._id })
+    setIsFetching(true)
     // console.log('Success:', values)
   }
 

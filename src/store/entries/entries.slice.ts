@@ -5,12 +5,14 @@ interface InitialStateType {
   isLoading: boolean
   isModalOpen: boolean
   entries: IEntry[]
+  isFetching: boolean
 }
 
 const initialState: InitialStateType = {
   isLoading: false,
   isModalOpen: false,
   entries: {} as IEntry[],
+  isFetching: false,
 }
 
 export const entriesSlice = createSlice({
@@ -32,6 +34,9 @@ export const entriesSlice = createSlice({
     getEntriesSuccess(state, action: PayloadAction<IEntry[]>) {
       state.entries = action.payload
       state.isLoading = false
+    },
+    setIsFetching(state, action: PayloadAction<boolean>) {
+      state.isFetching = action.payload
     },
   },
 })
