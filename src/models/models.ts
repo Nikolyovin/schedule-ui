@@ -4,7 +4,8 @@ export interface ILoginForm {
 }
 
 export interface IRegistrationForm {
-  username: string
+  login: string
+  // username: string
   password: string
   firstName: string
   color?: string
@@ -16,7 +17,8 @@ export interface ISelectColor {
 }
 
 export interface IUser {
-  username: string
+  // username: string
+  login: string
   password: string
   name: string
   color?: string
