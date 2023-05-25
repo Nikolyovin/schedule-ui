@@ -3,18 +3,22 @@ import { useActions } from '@/hooks/actions'
 import { useAppSelector } from '@/hooks/redux'
 import { IRegistrationForm } from '@/models/models'
 import { LockOutlined, UploadOutlined, UserOutlined } from '@ant-design/icons'
-import { Button, Form, Input, Row, Select, Spin, Upload } from 'antd'
+import { Button, Form, Input, Row, Select, Spin } from 'antd'
 import { useRouter } from 'next/router'
-import { FC, useEffect, useRef, useState } from 'react'
+import { FC, MutableRefObject, useEffect, useRef, useState } from 'react'
+
+//в useState сделать дефолтный аватар
 
 const RegistrationForm: FC = () => {
   const [color, setColor] = useState<string>('white')
-  const [img, setImg] = useState(null)
+  const [img, setImg] = useState<File | null>(null)
   const { createUserFetch } = useActions()
   const { isLoading, isPush } = useAppSelector((state) => state.registration)
   const router = useRouter()
 
-  const filePicker = useRef(null)
+  const filePicker = useRef<HTMLInputElement>(
+    null
+  ) as MutableRefObject<HTMLInputElement>
 
   useEffect(() => {
     if (isPush) {
@@ -25,15 +29,14 @@ const RegistrationForm: FC = () => {
   }, [isPush])
 
   const onFinish = (values: IRegistrationForm) => {
-    // console.log('Success:', { ...values, color })
-    console.log('img:', img)
     createUserFetch({ ...values, color, picture: img })
   }
   const handleChange = (value: string) => {
     setColor(value)
   }
 
-  const handleUpload = (e: React.FormEvent<HTMLInputElement>) => {
+  const handleUpload = (e: any) => {
+    // React.FormEvent<HTMLInputElement> не успокоил ts  пришлось any
     setImg(e.target.files[0])
   }
 
@@ -113,6 +116,7 @@ const RegistrationForm: FC = () => {
           ref={filePicker}
           type='file'
           onChange={handleUpload}
+          // defaultValue={defaultImg}
           accept='image/*,.png,.jpg,.gif,.web'
           className='opacity-0 w-0 h-0 leading-[0px] overflow-hidden p-0 m-0 '
         />

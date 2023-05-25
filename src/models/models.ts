@@ -7,8 +7,8 @@ export interface IRegistrationForm {
   login: string
   // username: string
   password: string
-  firstName: string
-  color?: string
+  name: string
+  color: string
 }
 
 export interface ISelectColor {
@@ -21,8 +21,8 @@ export interface IUser {
   login: string
   password: string
   name: string
-  color?: string
-  picture?: string
+  color: string
+  picture: string
   _id: string
 }
 
@@ -35,8 +35,8 @@ export interface ICreateUser {
   login: string
   password: string
   name: string
-  color?: string
-  picture?: string
+  color: string
+  picture: File | null
 }
 
 export interface ICreateEntry {

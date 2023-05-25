@@ -4,18 +4,31 @@ import { useAppSelector } from '@/hooks/redux'
 import { Calendar, Spin } from 'antd'
 import React, { useEffect, useState } from 'react'
 import type { Dayjs } from 'dayjs'
+import CellDate from './CellDate'
+import { IUser } from '@/models/models'
 
 const CalendarAll = () => {
   const { getEntriesFetch, setIsFetching } = useActions()
   const { entries, isFetching } = useAppSelector((state) => state.entries)
-  // const entries = {}
-
-  console.log('entries', entries)
+  const { users } = useAppSelector((state) => state.login)
+  const headerRender = () => null
 
   const dateCellRender: (date: Dayjs) => JSX.Element[] = (date) => {
     return entries.map((entry) => {
-      return new Date(+date).getDate() === new Date(entry.date).getDate() ? ( //+date нужен чтобы успокоить ts
-        <li key={entry._id}>{entry.clientName}</li>
+      const dateEntry = new Date(entry.date).setHours(0, 0, 0, 0) //setHours(0,0,0,0) для того чтобы сравнить две даты без времени
+      const dateCell = new Date(+date).setHours(0, 0, 0, 0) //+date нужен чтобы успокоить ts
+
+      const master: IUser =
+        users.find((user) => user._id === entry.master) || ({} as IUser)
+
+      return dateCell === dateEntry && master ? (
+        <CellDate
+          key={entry._id}
+          id={entry._id}
+          color={master.color}
+          masterName={master.name}
+          duration={entry.duration}
+        />
       ) : (
         <></>
       )
@@ -31,6 +44,7 @@ const CalendarAll = () => {
 
   return (
     <Calendar
+      // headerRender={headerRender}
       onSelect={(date) => {}}
       cellRender={(date: Dayjs) => dateCellRender(date)}
     />

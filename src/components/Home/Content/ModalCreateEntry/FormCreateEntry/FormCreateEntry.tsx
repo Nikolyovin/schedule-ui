@@ -7,9 +7,7 @@ import {
   Row,
   TimePicker,
 } from 'antd'
-import { useRouter } from 'next/router'
 import React from 'react'
-import { LockOutlined, UserOutlined } from '@ant-design/icons'
 import { ICreateEntry } from '@/models/models'
 import { useActions } from '@/hooks/actions'
 import { useAppSelector } from '@/hooks/redux'
@@ -18,10 +16,12 @@ const FormCreateEntry = () => {
   const { createEntryFetch, setIsFetching } = useActions()
   const { activeUser } = useAppSelector((state) => state.login)
 
+  const [form] = Form.useForm()
+
   const onFinish = (values: ICreateEntry) => {
     createEntryFetch({ ...values, master: activeUser._id })
     setIsFetching(true)
-    // console.log('Success:', values)
+    form.resetFields()
   }
 
   const { TextArea } = Input
@@ -33,6 +33,7 @@ const FormCreateEntry = () => {
       style={{ maxWidth: 1200 }}
       labelCol={{ span: 8 }}
       wrapperCol={{ span: 16 }}
+      form={form}
     >
       <Form.Item
         label='Имя клиента'
