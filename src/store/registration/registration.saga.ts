@@ -7,7 +7,7 @@ import { registrationActions } from './registration.slice'
 function* workCreateUser({ payload }: PayloadAction<ICreateUser>): any {
   let formData = new FormData()
 
-  formData.append('picture', payload.picture)
+  formData.append('picture', payload.picture as any)
   formData.append('login', payload.login)
   formData.append('name', payload.name)
   formData.append('password', payload.password)

@@ -30,7 +30,7 @@ const CalendarAll = () => {
           duration={entry.duration}
         />
       ) : (
-        <></>
+        <div key={entry._id}></div>
       )
     })
   }
