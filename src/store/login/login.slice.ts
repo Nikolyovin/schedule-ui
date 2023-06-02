@@ -2,6 +2,8 @@ import { IUser } from '@/models/models'
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
 const LS_USERS_KEY = 'LS_USERS_KEY'
+const LS_ACTIVE_USER_KEY = 'LS_ACTIVE_USER_KEY'
+
 // нужно для решение ошибки  localStorage is not defined
 const getFromLocalStorage = (key: string) => {
   if (!key || typeof window === 'undefined') {
@@ -26,7 +28,10 @@ const initialState: InitialStateType = {
     ? JSON.parse(getFromLocalStorage(LS_USERS_KEY) || '{}')
     : [],
   isLoading: false,
-  activeUser: {} as IUser,
+  // activeUser: {} as IUser,
+  activeUser: getFromLocalStorage(LS_ACTIVE_USER_KEY)
+    ? JSON.parse(getFromLocalStorage(LS_ACTIVE_USER_KEY) || '{}')
+    : [],
   // currentUser: '',
 }
 
@@ -36,6 +41,7 @@ export const loginSlice = createSlice({
   reducers: {
     setActiveUser(state, action: PayloadAction<IUser>) {
       state.activeUser = action.payload
+      localStorage.setItem(LS_ACTIVE_USER_KEY, JSON.stringify(state.activeUser))
     },
     getUsersFetch(state) {
       state.isLoading = true
