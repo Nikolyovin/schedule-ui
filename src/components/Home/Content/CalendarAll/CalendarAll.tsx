@@ -40,6 +40,7 @@ const CalendarAll = () => {
         isPush = true
     }
 
+    //ячейки для календаря
     const dateCellRender: (date: Dayjs) => JSX.Element[] = date => {
         return entries.map(entry => {
             const dateEntry = new Date(entry.date).setHours(0, 0, 0, 0) //setHours(0,0,0,0) для того чтобы сравнить две даты без времени

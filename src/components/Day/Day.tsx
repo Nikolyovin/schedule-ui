@@ -9,13 +9,16 @@ import { useActions } from '@/hooks/actions'
 
 const Day = () => {
     const { entries, currentDay } = useAppSelector(state => state.entries)
+    const { users } = useAppSelector(state => state.login)
 
     return (
         <>
             <Header />
-            <p className='capitalize text-center pt-5 text-2xl '>{currentDay}</p>
-            <div className=' flex flex-col justify-center items-center p-5'>
-                <Cards entries={entries} />
+            <div className='bg-slate-50 h-[100vh]'>
+                <p className='capitalize text-center pt-5 text-2xl '>{currentDay}</p>
+                <div className=' flex flex-col justify-center items-center p-5'>
+                    <Cards entries={entries} users={users} />
+                </div>
             </div>
         </>
     )
