@@ -42,6 +42,12 @@ export const entriesSlice = createSlice({
         },
         setCurrentDay(state, action: PayloadAction<string>) {
             state.currentDay = action.payload
+        },
+        removeEntryFetch(state, action: PayloadAction<string>) {
+            state.isLoading = true
+        },
+        removeEntrySuccess(state) {
+            state.isLoading = false
         }
     }
 })

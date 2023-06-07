@@ -16,7 +16,8 @@ const CalendarAll = () => {
     const { entries, isFetching } = useAppSelector(state => state.entries)
     const { users } = useAppSelector(state => state.login)
     const router = useRouter()
-
+    console.log('entries', entries)
+    console.log('isFetching', isFetching)
     let isPush: boolean = true
 
     const routerPush = (date: Dayjs) => {

@@ -1,10 +1,12 @@
 import Loading from '@/components/common/Loader'
 import { IEntry, IUser } from '@/models/models'
-import { Card } from 'antd'
+import { CloseCircleOutlined, CloseOutlined, CloseSquareOutlined } from '@ant-design/icons'
+import { Button, Card, Popconfirm } from 'antd'
 import moment from 'moment'
 import 'moment/locale/ru'
 import { useRouter } from 'next/router'
 import React, { FC, useEffect } from 'react'
+import ButtonCancel from './ButtonCancel/ButtonCancel'
 
 interface IProps {
     entries: IEntry[]
@@ -12,13 +14,13 @@ interface IProps {
 }
 
 const Cards: FC<IProps> = ({ entries, users }) => {
-    useEffect(() => {
-        if (Object.keys(entries).length === 0) {
-            router.push({
-                pathname: '/'
-            })
-        }
-    }, [])
+    // useEffect(() => {
+    //     if (Object.keys(entries).length === 0) {
+    //         router.push({
+    //             pathname: '/'
+    //         })
+    //     }
+    // }, [])
 
     let countCards = 0
     console.log('entries', entries)
@@ -67,6 +69,7 @@ const Cards: FC<IProps> = ({ entries, users }) => {
                                 <p className='text-lg mb-1'>
                                     Описание: <span className='font-medium text-xl '>{entry.description}</span>
                                 </p>
+                                <ButtonCancel entryId={entry._id} />
                             </Card>
                         )
                     }
