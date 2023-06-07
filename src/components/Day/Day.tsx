@@ -14,7 +14,7 @@ const Day = () => {
     return (
         <>
             <Header />
-            <div className='bg-slate-50 h-[100vh]'>
+            <div className='bg-slate-50 min-h-[100vh]'>
                 <p className='capitalize text-center pt-5 text-2xl '>{currentDay}</p>
                 <div className=' flex flex-col justify-center items-center p-5'>
                     <Cards entries={entries} users={users} />
