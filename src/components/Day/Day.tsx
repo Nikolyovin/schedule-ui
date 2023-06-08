@@ -13,16 +13,11 @@ const Day = () => {
     const { entries, currentDay, isFetching, isModalOpen } = useAppSelector(state => state.entries)
     const { users } = useAppSelector(state => state.login)
     const { getEntriesFetch, setIsFetching, setIsModalOpen } = useActions()
-    const [formattedDate, setFormattedDate] = useState('Загрузка...')
-
-    useEffect(() => {
-        setFormattedDate(currentDay)
-    }, [])
 
     const onOpenModal = () => setIsModalOpen(true)
     const onCloseModal = () => setIsModalOpen(false)
 
-    // const formattedDate = `${moment(currentDay).format('dddd')}, ${moment(currentDay).format('ll')}`
+    const formattedDate = `${moment(currentDay).format('dddd')}, ${moment(currentDay).format('ll')}`
 
     console.log('day:', currentDay)
 

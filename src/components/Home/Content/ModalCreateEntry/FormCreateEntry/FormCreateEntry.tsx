@@ -4,6 +4,7 @@ import { ICreateEntry } from '@/models/models'
 import { useActions } from '@/hooks/actions'
 import { useAppSelector } from '@/hooks/redux'
 import dayjs from 'dayjs'
+import moment from 'moment'
 
 interface IProps {
     currentDay: Date | null
@@ -13,7 +14,9 @@ const FormCreateEntry: FC<IProps> = ({ currentDay }) => {
     const { createEntryFetch, setIsFetching } = useActions()
     const { activeUser } = useAppSelector(state => state.login)
 
-    console.log('fay:', currentDay)
+    // const formattedDate = moment().toDate()
+    // console.log('formattedDate:', formattedDate)
+    console.log('currentDay:', currentDay)
 
     const [form] = Form.useForm()
 

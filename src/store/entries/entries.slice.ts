@@ -6,7 +6,7 @@ interface InitialStateType {
     isModalOpen: boolean
     entries: IEntry[]
     isFetching: boolean
-    currentDay: string
+    currentDay: Date | null
 }
 
 const initialState: InitialStateType = {
@@ -14,7 +14,7 @@ const initialState: InitialStateType = {
     isModalOpen: false,
     entries: {} as IEntry[],
     isFetching: false,
-    currentDay: ''
+    currentDay: null
 }
 
 export const entriesSlice = createSlice({
@@ -40,7 +40,7 @@ export const entriesSlice = createSlice({
         setIsFetching(state, action: PayloadAction<boolean>) {
             state.isFetching = action.payload
         },
-        setCurrentDay(state, action: PayloadAction<string>) {
+        setCurrentDay(state, action: PayloadAction<Date>) {
             state.currentDay = action.payload
         },
         removeEntryFetch(state, action: PayloadAction<string>) {

@@ -30,8 +30,8 @@ const CalendarAll = () => {
     }
 
     const onSelect = (date: Dayjs) => {
-        const formattedDate = `${moment(date.toDate()).format('dddd')}, ${moment(date.toDate()).format('ll')}`
-        setCurrentDay(formattedDate)
+        // const formattedDate = `${moment(date.toDate()).format('dddd')}, ${moment(date.toDate()).format('ll')}`
+        setCurrentDay(new Date(+date))
 
         if (isPush) {
             routerPush(date)
