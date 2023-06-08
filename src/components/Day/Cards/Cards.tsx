@@ -23,10 +23,6 @@ const Cards: FC<IProps> = ({ entries, users }) => {
     // }, [])
 
     let countCards = 0
-    console.log('entries', entries)
-
-    // const sortEntries =
-    //     entries.length !== 0 ? [...entries].sort((a, b) => new Date(a.time).valueOf() - new Date(b.time).valueOf()) : []
 
     const router = useRouter()
     if (Object.keys(entries).length === 0) return <Loading />

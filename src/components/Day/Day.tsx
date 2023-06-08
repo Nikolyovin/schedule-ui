@@ -1,16 +1,30 @@
 import Header from '@/components/Home/Header/Header'
 import { useAppSelector } from '@/hooks/redux'
-import { Card, Layout } from 'antd'
+import { Button, Card, Layout, Modal } from 'antd'
 import { useRouter } from 'next/router'
-import React, { FC, useEffect } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import Cards from './Cards/Cards'
 import Loading from '../common/Loader'
 import { useActions } from '@/hooks/actions'
+import FormCreateEntry from '../Home/Content/ModalCreateEntry/FormCreateEntry/FormCreateEntry'
+import moment from 'moment'
 
 const Day = () => {
-    const { entries, currentDay, isFetching } = useAppSelector(state => state.entries)
+    const { entries, currentDay, isFetching, isModalOpen } = useAppSelector(state => state.entries)
     const { users } = useAppSelector(state => state.login)
-    const { getEntriesFetch, setIsFetching } = useActions()
+    const { getEntriesFetch, setIsFetching, setIsModalOpen } = useActions()
+    const [formattedDate, setFormattedDate] = useState('Загрузка...')
+
+    useEffect(() => {
+        setFormattedDate(currentDay)
+    }, [])
+
+    const onOpenModal = () => setIsModalOpen(true)
+    const onCloseModal = () => setIsModalOpen(false)
+
+    // const formattedDate = `${moment(currentDay).format('dddd')}, ${moment(currentDay).format('ll')}`
+
+    console.log('day:', currentDay)
 
     useEffect(() => {
         getEntriesFetch()
@@ -20,10 +34,24 @@ const Day = () => {
     return (
         <>
             <Header />
-            <div className='bg-slate-50 min-h-[100vh]'>
-                <p className='capitalize text-center pt-5 text-2xl '>{currentDay}</p>
+            {/* <div className='bg-slate-50 min-h-[100vh]'> */}
+            <div className='bg-slate-50 min-h-[calc(100vh-64px)]'>
+                <p className='capitalize text-center pt-5 text-2xl '>{formattedDate}</p>
                 <div className=' flex flex-col justify-center items-center p-5'>
                     <Cards entries={entries} users={users} />
+                    <Button className='mt-5' type='primary' onClick={onOpenModal}>
+                        Добавить
+                    </Button>
+                    <Modal
+                        title='Создание Записи'
+                        open={isModalOpen}
+                        // onOk={handleOk}
+                        onCancel={onCloseModal}
+                        footer={null}
+                        centered
+                    >
+                        <FormCreateEntry currentDay={currentDay} />
+                    </Modal>
                 </div>
             </div>
         </>
