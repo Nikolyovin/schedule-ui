@@ -10,17 +10,15 @@ import FormCreateEntry from '../Home/Content/ModalCreateEntry/FormCreateEntry/Fo
 import moment from 'moment'
 import dynamic from 'next/dynamic'
 
-const Day = () => {
+const Day: FC = () => {
     const { entries, currentDay, isFetching, isModalOpen } = useAppSelector(state => state.entries)
     const { users } = useAppSelector(state => state.login)
-    const { getEntriesFetch, setIsFetching, setIsModalOpen } = useActions()
+    const { getEntriesFetch, setIsFetching, setIsModalOpen, setIsNew } = useActions()
 
     const onOpenModal = () => setIsModalOpen(true)
-    const onCloseModal = () => setIsModalOpen(false)
+    const onCloseModal = () => setIsModalOpen(false) && setIsNew(true)
 
     const formattedDate = `${moment(currentDay).format('dddd')}, ${moment(currentDay).format('ll')}`
-
-    console.log('day:', currentDay)
 
     useEffect(() => {
         getEntriesFetch()

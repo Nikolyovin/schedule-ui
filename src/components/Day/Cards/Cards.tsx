@@ -1,12 +1,11 @@
 import Loading from '@/components/common/Loader'
 import { IEntry, IUser } from '@/models/models'
-import { CloseCircleOutlined, CloseOutlined, CloseSquareOutlined } from '@ant-design/icons'
-import { Button, Card, Popconfirm } from 'antd'
+import { Card } from 'antd'
 import moment from 'moment'
 import 'moment/locale/ru'
 import { useRouter } from 'next/router'
 import React, { FC, useEffect } from 'react'
-import ButtonCancel from './ButtonCancel/ButtonCancel'
+import ButtonsCard from './ButtonsCard/ButtonsCard'
 
 interface IProps {
     entries: IEntry[]
@@ -65,7 +64,7 @@ const Cards: FC<IProps> = ({ entries, users }) => {
                                 <p className='text-lg mb-1'>
                                     Описание: <span className='font-medium text-xl '>{entry.description}</span>
                                 </p>
-                                <ButtonCancel entryId={entry._id} />
+                                <ButtonsCard entryId={entry._id} />
                             </Card>
                         )
                     }

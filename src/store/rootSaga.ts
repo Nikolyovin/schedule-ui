@@ -4,7 +4,7 @@ import registrationSaga from './registration/registration.saga'
 import entriesSaga from './entries/entries.saga'
 
 export default function* rootSaga() {
-  yield spawn(loginSaga)
-  yield spawn(registrationSaga)
-  yield spawn(entriesSaga)
+    yield spawn(loginSaga)
+    yield spawn(registrationSaga)
+    yield spawn(entriesSaga)
 }

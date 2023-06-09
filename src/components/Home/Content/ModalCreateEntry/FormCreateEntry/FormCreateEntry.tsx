@@ -11,17 +11,19 @@ interface IProps {
 }
 
 const FormCreateEntry: FC<IProps> = ({ currentDay }) => {
-    const { createEntryFetch, setIsFetching } = useActions()
+    const { createEntryFetch, setIsFetching, updateEntryFetch } = useActions()
     const { activeUser } = useAppSelector(state => state.login)
+    const { isNew, updateEntryId } = useAppSelector(state => state.entries)
 
-    // const formattedDate = moment().toDate()
-    // console.log('formattedDate:', formattedDate)
-    console.log('currentDay:', currentDay)
+    console.log('isNew', isNew)
 
     const [form] = Form.useForm()
 
     const onFinish = (values: ICreateEntry) => {
-        createEntryFetch({ ...values, master: activeUser._id })
+        isNew
+            ? createEntryFetch({ ...values, master: activeUser._id })
+            : updateEntryFetch({ ...values, master: activeUser._id, updateEntryId: updateEntryId })
+
         setIsFetching(true)
         form.resetFields()
     }
@@ -82,9 +84,15 @@ const FormCreateEntry: FC<IProps> = ({ currentDay }) => {
             </Form.Item>
             <Row justify={'center'}>
                 <Form.Item>
-                    <Button type='primary' htmlType='submit'>
-                        Создать
-                    </Button>
+                    {isNew ? (
+                        <Button type='primary' htmlType='submit'>
+                            Создать
+                        </Button>
+                    ) : (
+                        <Button type='primary' htmlType='submit'>
+                            Изменить
+                        </Button>
+                    )}
                 </Form.Item>
             </Row>
         </Form>

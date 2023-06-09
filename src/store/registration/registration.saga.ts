@@ -5,27 +5,26 @@ import { ICreateUser } from '@/models/models'
 import { registrationActions } from './registration.slice'
 
 function* workCreateUser({ payload }: PayloadAction<ICreateUser>): any {
-  let formData = new FormData()
+    let formData = new FormData()
 
-  formData.append('picture', payload.picture as any)
-  formData.append('login', payload.login)
-  formData.append('name', payload.name)
-  formData.append('password', payload.password)
-  formData.append('color', payload.color)
+    formData.append('picture', payload.picture as any)
+    formData.append('login', payload.login)
+    formData.append('name', payload.name)
+    formData.append('password', payload.password)
+    formData.append('color', payload.color)
 
-  const response = yield call(() =>
-    fetch(`${URL_SERVER}api/users`, {
-      method: 'POST',
-      body: formData,
-    })
-  )
-  console.log('response', response)
-  yield put(registrationActions.createUserSuccess())
-  yield put(registrationActions.isPushChange(true))
+    const response = yield call(() =>
+        fetch(`${URL_SERVER}api/users`, {
+            method: 'POST',
+            body: formData
+        })
+    )
+    yield put(registrationActions.createUserSuccess())
+    yield put(registrationActions.isPushChange(true))
 }
 
 function* registrationSaga() {
-  yield takeLatest('registration/createUserFetch', workCreateUser) //имя слайса слэш название редьюсера
+    yield takeLatest('registration/createUserFetch', workCreateUser) //имя слайса слэш название редьюсера
 }
 
 export default registrationSaga
