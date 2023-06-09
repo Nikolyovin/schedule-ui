@@ -8,6 +8,7 @@ import Loading from '../common/Loader'
 import { useActions } from '@/hooks/actions'
 import FormCreateEntry from '../Home/Content/ModalCreateEntry/FormCreateEntry/FormCreateEntry'
 import moment from 'moment'
+import dynamic from 'next/dynamic'
 
 const Day = () => {
     const { entries, currentDay, isFetching, isModalOpen } = useAppSelector(state => state.entries)
@@ -53,4 +54,4 @@ const Day = () => {
     )
 }
 
-export default Day
+export default dynamic(() => Promise.resolve(Day), { ssr: false })

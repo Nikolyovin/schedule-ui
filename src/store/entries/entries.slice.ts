@@ -1,6 +1,15 @@
 import { ICreateEntry, IEntry } from '@/models/models'
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
+const LS_CURRENT_DAY_KAY = 'LS_CURRENT_DAY_KAY'
+
+const getFromLocalStorage = (key: string) => {
+    if (!key || typeof window === 'undefined') {
+        return ''
+    }
+    return localStorage.getItem(key)
+}
+
 interface InitialStateType {
     isLoading: boolean
     isModalOpen: boolean
@@ -14,7 +23,9 @@ const initialState: InitialStateType = {
     isModalOpen: false,
     entries: {} as IEntry[],
     isFetching: false,
-    currentDay: null
+    currentDay: getFromLocalStorage(LS_CURRENT_DAY_KAY)
+        ? JSON.parse(getFromLocalStorage(LS_CURRENT_DAY_KAY) || 'null')
+        : []
 }
 
 export const entriesSlice = createSlice({
@@ -42,6 +53,7 @@ export const entriesSlice = createSlice({
         },
         setCurrentDay(state, action: PayloadAction<Date>) {
             state.currentDay = action.payload
+            localStorage.setItem(LS_CURRENT_DAY_KAY, JSON.stringify(state.currentDay))
         },
         removeEntryFetch(state, action: PayloadAction<string>) {
             state.isLoading = true
