@@ -1,10 +1,9 @@
 import { Button, DatePicker, Form, Input, InputNumber, Row, TimePicker } from 'antd'
-import React, { FC } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { ICreateEntry } from '@/models/models'
 import { useActions } from '@/hooks/actions'
 import { useAppSelector } from '@/hooks/redux'
 import dayjs from 'dayjs'
-import moment from 'moment'
 
 interface IProps {
     currentDay: Date | null
@@ -13,16 +12,22 @@ interface IProps {
 const FormCreateEntry: FC<IProps> = ({ currentDay }) => {
     const { createEntryFetch, setIsFetching, updateEntryFetch } = useActions()
     const { activeUser } = useAppSelector(state => state.login)
-    const { isNew, updateEntryId } = useAppSelector(state => state.entries)
+    const { isNew, updateEntry } = useAppSelector(state => state.entries)
 
-    console.log('isNew', isNew)
+    // const [clientName, setClientName] = useState('')
+
+    // useEffect(() => {
+    //     setClientName(updateEntry.clientName)
+    // }, [updateEntry])
+
+    console.log('updateEntry', updateEntry)
 
     const [form] = Form.useForm()
 
     const onFinish = (values: ICreateEntry) => {
         isNew
             ? createEntryFetch({ ...values, master: activeUser._id })
-            : updateEntryFetch({ ...values, master: activeUser._id, updateEntryId: updateEntryId })
+            : updateEntryFetch({ ...values, master: activeUser._id, updateEntryId: updateEntry._id })
 
         setIsFetching(true)
         form.resetFields()
@@ -40,12 +45,15 @@ const FormCreateEntry: FC<IProps> = ({ currentDay }) => {
             form={form}
         >
             <Form.Item
+                // initialValue={!isNew ? updateEntry.clientName : null}
+                // initialValue={clientName}
                 label='Имя клиента'
                 name='clientName'
                 rules={[{ required: true, message: 'Пожалуйста укажите имя клиента!' }]}
             >
                 <Input
                     autoComplete='off'
+                    value={updateEntry.clientName}
                     // prefix={<UserOutlined className='site-form-item-icon' />}
                     placeholder='Имя клиента'
                 />

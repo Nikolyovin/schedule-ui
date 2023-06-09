@@ -1,23 +1,24 @@
 import { useActions } from '@/hooks/actions'
+import { IEntry } from '@/models/models'
 import { CloseOutlined, EditOutlined } from '@ant-design/icons'
 import { Button, Popconfirm } from 'antd'
 import React, { FC } from 'react'
 
 interface IProps {
-    entryId: string
+    entry: IEntry
 }
 
-const ButtonsCard: FC<IProps> = ({ entryId }) => {
-    const { removeEntryFetch, setIsFetching, setIsModalOpen, setUpdateEntryId, setIsNew } = useActions()
+const ButtonsCard: FC<IProps> = ({ entry }) => {
+    const { removeEntryFetch, setIsFetching, setIsModalOpen, setUpdateEntry, setIsNew } = useActions()
 
     const onConfirm: () => void = () => {
-        removeEntryFetch(entryId)
+        removeEntryFetch(entry._id)
         setIsFetching(true)
     }
 
     const onEditEntry: () => void = () => {
         setIsModalOpen(true)
-        setUpdateEntryId(entryId)
+        setUpdateEntry(entry)
         setIsNew(false)
     }
 

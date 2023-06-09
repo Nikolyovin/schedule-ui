@@ -17,7 +17,7 @@ interface InitialStateType {
     isFetching: boolean
     currentDay: Date | null
     isNew: boolean
-    updateEntryId: string
+    updateEntry: IEntry
 }
 
 const initialState: InitialStateType = {
@@ -29,7 +29,7 @@ const initialState: InitialStateType = {
         ? JSON.parse(getFromLocalStorage(LS_CURRENT_DAY_KAY) || 'null')
         : [],
     isNew: true,
-    updateEntryId: ''
+    updateEntry: {} as IEntry
 }
 
 export const entriesSlice = createSlice({
@@ -83,8 +83,8 @@ export const entriesSlice = createSlice({
                     : entry
             )
         },
-        setUpdateEntryId(state, action: PayloadAction<string>) {
-            state.updateEntryId = action.payload
+        setUpdateEntry(state, action: PayloadAction<IEntry>) {
+            state.updateEntry = action.payload
         }
     }
 })

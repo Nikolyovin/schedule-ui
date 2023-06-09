@@ -64,7 +64,7 @@ const Cards: FC<IProps> = ({ entries, users }) => {
                                 <p className='text-lg mb-1'>
                                     Описание: <span className='font-medium text-xl '>{entry.description}</span>
                                 </p>
-                                <ButtonsCard entryId={entry._id} />
+                                <ButtonsCard entry={entry} />
                             </Card>
                         )
                     }
