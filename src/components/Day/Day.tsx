@@ -12,8 +12,17 @@ import dynamic from 'next/dynamic'
 
 const Day: FC = () => {
     const { entries, currentDay, isFetching, isModalOpen } = useAppSelector(state => state.entries)
-    const { users } = useAppSelector(state => state.login)
+    const { users, activeUser } = useAppSelector(state => state.login)
     const { getEntriesFetch, setIsFetching, setIsModalOpen, setIsNew } = useActions()
+    const router = useRouter()
+
+    useEffect(() => {
+        if (Object.keys(activeUser).length === 0) {
+            router.push({
+                pathname: '/login'
+            })
+        }
+    }, [activeUser])
 
     const onOpenModal = () => setIsModalOpen(true)
     const onCloseModal = () => setIsModalOpen(false) && setIsNew(true)

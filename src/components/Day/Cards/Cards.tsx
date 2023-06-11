@@ -6,6 +6,7 @@ import 'moment/locale/ru'
 import { useRouter } from 'next/router'
 import React, { FC, useEffect } from 'react'
 import ButtonsCard from './ButtonsCard/ButtonsCard'
+import TheCard from './TheCard/TheCard'
 
 interface IProps {
     entries: IEntry[]
@@ -13,14 +14,6 @@ interface IProps {
 }
 
 const Cards: FC<IProps> = ({ entries, users }) => {
-    // useEffect(() => {
-    //     if (Object.keys(entries).length === 0) {
-    //         router.push({
-    //             pathname: '/'
-    //         })
-    //     }
-    // }, [])
-
     let countCards = 0
 
     const router = useRouter()
@@ -38,35 +31,7 @@ const Cards: FC<IProps> = ({ entries, users }) => {
 
                     if (dateEntry === dateCell) {
                         countCards++
-                        return (
-                            <Card
-                                headStyle={{ backgroundColor: master.color, border: 0 }}
-                                key={entry._id}
-                                className='w-[800px] mt-3'
-                                title={master.name}
-                            >
-                                <div className='flex mb-1'>
-                                    <p className='text-lg '>
-                                        Начало сеанса:
-                                        <span className='text-2xl font-medium'>
-                                            {' '}
-                                            {moment(entry.time).format('HH:mm')};{' '}
-                                        </span>
-                                    </p>
-                                    <p className='text-lg ml-2'>
-                                        Продолжительность:{' '}
-                                        <span className='text-2xl font-medium'>{entry.duration} ч.</span>
-                                    </p>
-                                </div>
-                                <p className='text-lg mb-1'>
-                                    Имя клиента: <span className='font-medium text-xl'>{entry.clientName}</span>
-                                </p>
-                                <p className='text-lg mb-1'>
-                                    Описание: <span className='font-medium text-xl '>{entry.description}</span>
-                                </p>
-                                <ButtonsCard entry={entry} />
-                            </Card>
-                        )
+                        return <TheCard key={entry._id} entry={entry} master={master} />
                     }
                 })}
             {!countCards && (

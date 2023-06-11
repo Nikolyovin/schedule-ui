@@ -70,6 +70,9 @@ const CalendarAll = () => {
 
     return (
         <Calendar
+            // className='min-h-[calc(100vh-150px)]'
+            // fullscreen={false}
+            // style={{ height: 300 }}
             onPanelChange={(date: Dayjs) => onPanelChange(date)}
             locale={locale}
             onSelect={(date: Dayjs) => onSelect(date)}
