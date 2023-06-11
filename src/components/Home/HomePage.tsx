@@ -6,24 +6,23 @@ import { useAppSelector } from '@/hooks/redux'
 import { useRouter } from 'next/router'
 
 const HomePage: FC = () => {
-  const router = useRouter()
-  const { activeUser } = useAppSelector((state) => state.login)
-  console.log('activeUser', activeUser)
+    const router = useRouter()
+    const { activeUser } = useAppSelector(state => state.login)
 
-  useEffect(() => {
-    if (Object.keys(activeUser).length === 0) {
-      router.push({
-        pathname: '/login',
-      })
-    }
-  }, [activeUser])
+    useEffect(() => {
+        if (Object.keys(activeUser).length === 0) {
+            router.push({
+                pathname: '/login'
+            })
+        }
+    }, [activeUser])
 
-  return (
-    <Layout className='layout'>
-      <Header />
-      <Content />
-    </Layout>
-  )
+    return (
+        <Layout className='layout'>
+            <Header />
+            <Content />
+        </Layout>
+    )
 }
 
 export default HomePage

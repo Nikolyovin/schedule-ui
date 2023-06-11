@@ -1,94 +1,110 @@
-import {
-  Button,
-  DatePicker,
-  Form,
-  Input,
-  InputNumber,
-  Row,
-  TimePicker,
-} from 'antd'
-import { useRouter } from 'next/router'
-import React from 'react'
-import { LockOutlined, UserOutlined } from '@ant-design/icons'
+import { Button, DatePicker, Form, Input, InputNumber, Row, TimePicker } from 'antd'
+import React, { FC, useEffect, useState } from 'react'
 import { ICreateEntry } from '@/models/models'
 import { useActions } from '@/hooks/actions'
 import { useAppSelector } from '@/hooks/redux'
+import dayjs from 'dayjs'
 
-const FormCreateEntry = () => {
-  const { createEntryFetch } = useActions()
-  const { activeUser } = useAppSelector((state) => state.login)
+interface IProps {
+    currentDay: Date | null
+}
 
-  const onFinish = (values: ICreateEntry) => {
-    createEntryFetch({ ...values, master: activeUser._id })
-    // console.log('Success:', values)
-  }
+const FormCreateEntry: FC<IProps> = ({ currentDay }) => {
+    const { createEntryFetch, setIsFetching, updateEntryFetch } = useActions()
+    const { activeUser } = useAppSelector(state => state.login)
+    const { isNew, updateEntry } = useAppSelector(state => state.entries)
 
-  const { TextArea } = Input
+    // const [clientName, setClientName] = useState('')
 
-  return (
-    <Form
-      onFinish={onFinish}
-      name='login'
-      style={{ maxWidth: 1200 }}
-      labelCol={{ span: 8 }}
-      wrapperCol={{ span: 16 }}
-    >
-      <Form.Item
-        label='Имя клиента'
-        name='clientName'
-        rules={[{ required: true, message: 'Пожалуйста укажите имя клиента!' }]}
-      >
-        <Input
-          autoComplete='off'
-          // prefix={<UserOutlined className='site-form-item-icon' />}
-          placeholder='Имя клиента'
-        />
-      </Form.Item>
+    // useEffect(() => {
+    //     setClientName(updateEntry.clientName)
+    // }, [updateEntry])
 
-      <Form.Item
-        label='Дата сеанса'
-        name='date'
-        rules={[{ required: true, message: 'Укажите дату сеанса!' }]}
-      >
-        <DatePicker />
-      </Form.Item>
-      <Form.Item
-        label='Время сеанса'
-        name='time'
-        rules={[{ required: true, message: 'Укажите время сеанса!' }]}
-      >
-        <TimePicker />
-      </Form.Item>
+    console.log('updateEntry', updateEntry)
 
-      <Form.Item
-        label='Продолжительность(в часах)'
-        name='duration'
-        rules={[
-          { required: true, message: 'Укажите продолжительность часов!' },
-        ]}
-      >
-        <InputNumber min={1} max={12} />
-      </Form.Item>
+    const [form] = Form.useForm()
 
-      <Form.Item
-        label='Описание'
-        name='description'
-        // rules={[{ required: true, message: 'Пожалуйста введите пароль!' }]}
-      >
-        <TextArea
-          // autoComplete='off'
-          placeholder='Описание'
-        />
-      </Form.Item>
-      <Row justify={'center'}>
-        <Form.Item>
-          <Button type='primary' htmlType='submit'>
-            Создать
-          </Button>
-        </Form.Item>
-      </Row>
-    </Form>
-  )
+    const onFinish = (values: ICreateEntry) => {
+        isNew
+            ? createEntryFetch({ ...values, master: activeUser._id })
+            : updateEntryFetch({ ...values, master: activeUser._id, updateEntryId: updateEntry._id })
+
+        setIsFetching(true)
+        form.resetFields()
+    }
+
+    const { TextArea } = Input
+
+    return (
+        <Form
+            onFinish={onFinish}
+            name='login'
+            style={{ maxWidth: 1200 }}
+            labelCol={{ span: 8 }}
+            wrapperCol={{ span: 16 }}
+            form={form}
+        >
+            <Form.Item
+                // initialValue={!isNew ? updateEntry.clientName : null}
+                // initialValue={clientName}
+                label='Имя клиента'
+                name='clientName'
+                rules={[{ required: true, message: 'Пожалуйста укажите имя клиента!' }]}
+            >
+                <Input
+                    autoComplete='off'
+                    value={updateEntry.clientName}
+                    // prefix={<UserOutlined className='site-form-item-icon' />}
+                    placeholder='Имя клиента'
+                />
+            </Form.Item>
+
+            <Form.Item
+                label='Дата сеанса'
+                name='date'
+                initialValue={currentDay ? dayjs(currentDay) : null}
+                rules={[{ required: true, message: 'Укажите дату сеанса!' }]}
+            >
+                {/* {props.currentDay ? <DatePicker ={dayjs(props.currentDay)} /> : <DatePicker />} */}
+                <DatePicker />
+            </Form.Item>
+            <Form.Item label='Время сеанса' name='time' rules={[{ required: true, message: 'Укажите время сеанса!' }]}>
+                <TimePicker />
+            </Form.Item>
+
+            <Form.Item
+                label='Длительность:'
+                name='duration'
+                rules={[{ required: true, message: 'Укажите продолжительность часов!' }]}
+            >
+                <InputNumber placeholder='в часах' min={1} max={12} />
+            </Form.Item>
+
+            <Form.Item
+                label='Описание'
+                name='description'
+                // rules={[{ required: true, message: 'Пожалуйста введите пароль!' }]}
+            >
+                <TextArea
+                    // autoComplete='off'
+                    placeholder='Описание'
+                />
+            </Form.Item>
+            <Row justify={'center'}>
+                <Form.Item>
+                    {isNew ? (
+                        <Button type='primary' htmlType='submit'>
+                            Создать
+                        </Button>
+                    ) : (
+                        <Button type='primary' htmlType='submit'>
+                            Изменить
+                        </Button>
+                    )}
+                </Form.Item>
+            </Row>
+        </Form>
+    )
 }
 
 export default FormCreateEntry

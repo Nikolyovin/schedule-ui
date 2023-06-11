@@ -1,41 +1,53 @@
 import { PayloadAction } from '@reduxjs/toolkit'
-import {
-  call,
-  put,
-  takeEvery,
-  takeLatest,
-  takeLeading,
-} from 'redux-saga/effects'
-import { ICreateEntry } from '@/models/models'
+import { call, put, takeEvery, takeLatest, takeLeading } from 'redux-saga/effects'
+import { ICreateEntry, IEntry, IUpdateEntry } from '@/models/models'
 import { URL_SERVER } from '@/common'
 import { entriesActions } from './entries.slice'
-import { log } from 'console'
+import EntryService from '@/services/EntryService'
 
-function* workCreateEntry({ payload }: PayloadAction<ICreateEntry>): any {
-  const response = yield call(() =>
-    fetch(`${URL_SERVER}api/entries`, {
-      method: 'POST',
-      body: JSON.stringify(payload),
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-      },
-    })
-  )
-
-  yield put(entriesActions.createEntrySuccess())
-  //
-  yield put(entriesActions.setIsModalOpen(false))
+function* createEntry({ payload }: PayloadAction<ICreateEntry>): any {
+    try {
+        const response = yield call(() => EntryService.create(payload))
+        yield put(entriesActions.createEntrySuccess())
+        yield put(entriesActions.setIsModalOpen(false))
+    } catch (error) {
+        throw error
+    }
 }
 
-function* workGetEntry(): any {
-  const response = yield call(() => fetch(`${URL_SERVER}api/entries`))
-  const formattedResponse = yield response.json()
-  yield put(entriesActions.getEntriesSuccess(formattedResponse))
+function* getEntries(): any {
+    try {
+        const response = yield call(() => EntryService.getAll())
+        yield put(entriesActions.getEntriesSuccess(response.data))
+    } catch (error) {
+        throw error
+    }
+}
+
+function* removeEntry({ payload }: PayloadAction<string>): any {
+    try {
+        const response = yield call(() => EntryService.delete(payload))
+        yield put(entriesActions.removeEntrySuccess())
+    } catch (error) {
+        throw error
+    }
+}
+
+function* updateEntry({ payload }: PayloadAction<IUpdateEntry>): any {
+    console.log('payload', payload)
+    const { clientName, date, description, duration, master, time, updateEntryId } = payload
+    const response = yield call(() =>
+        EntryService.update(updateEntryId, { clientName, date, description, duration, master, time })
+    )
+    // yield put(entriesActions.updateEntrySuccess(response.data))
+    yield put(entriesActions.setIsModalOpen(false))
 }
 
 function* entriesSaga() {
-  yield takeLeading('entries/createEntryFetch', workCreateEntry) //имя слайса слэш название редьюсера; takeLeading слушает только на первое нажатие
-  yield takeEvery('entries/getEntriesFetch', workGetEntry) //takeEvery слушает каждое изменение
+    yield takeLeading('entries/createEntryFetch', createEntry) //имя слайса слэш название редьюсера; takeLeading слушает только на первое нажатие
+    yield takeEvery('entries/getEntriesFetch', getEntries) //takeEvery слушает каждое изменение
+    yield takeLeading('entries/removeEntryFetch', removeEntry)
+    yield takeLeading('entries/updateEntryFetch', updateEntry)
 }
 
 export default entriesSaga

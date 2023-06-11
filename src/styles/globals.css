@@ -72,3 +72,9 @@ select {
   font: inherit;
 }
 
+/*/////////////////*/
+
+.ant-picker-calendar-mode-switch{
+  display: none;
+}
+
