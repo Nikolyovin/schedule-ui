@@ -1,19 +1,19 @@
 import Header from '@/components/Home/Header/Header'
 import { useAppSelector } from '@/hooks/redux'
-import { Button, Card, Layout, Modal } from 'antd'
+import { Button, Modal } from 'antd'
 import { useRouter } from 'next/router'
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, useEffect } from 'react'
 import Cards from './Cards/Cards'
-import Loading from '../common/Loader'
 import { useActions } from '@/hooks/actions'
 import FormCreateEntry from '../Home/Content/ModalCreateEntry/FormCreateEntry/FormCreateEntry'
 import moment from 'moment'
 import dynamic from 'next/dynamic'
+import { IEntry } from '@/models/models'
 
 const Day: FC = () => {
     const { entries, currentDay, isFetching, isModalOpen } = useAppSelector(state => state.entries)
     const { users, activeUser } = useAppSelector(state => state.login)
-    const { getEntriesFetch, setIsFetching, setIsModalOpen, setIsNew } = useActions()
+    const { getEntriesFetch, setIsFetching, setIsModalOpen, setIsNew, setUpdateEntry } = useActions()
     const router = useRouter()
 
     useEffect(() => {
@@ -25,7 +25,11 @@ const Day: FC = () => {
     }, [activeUser])
 
     const onOpenModal = () => setIsModalOpen(true)
-    const onCloseModal = () => setIsModalOpen(false) && setIsNew(true)
+    const onCloseModal = () => {
+        setIsModalOpen(false)
+        setIsNew(true)
+        setUpdateEntry({} as IEntry)
+    }
 
     const formattedDate = `${moment(currentDay).format('dddd')}, ${moment(currentDay).format('ll')}`
 
@@ -37,7 +41,6 @@ const Day: FC = () => {
     return (
         <>
             <Header />
-            {/* <div className='bg-slate-50 min-h-[100vh]'> */}
             <div className='bg-slate-50 min-h-[calc(100vh-64px)]'>
                 <p className='capitalize text-center pt-5 text-2xl '>{formattedDate}</p>
                 <div className=' flex flex-col justify-center items-center p-5'>

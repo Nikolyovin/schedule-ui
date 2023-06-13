@@ -1,6 +1,6 @@
 import { Button, DatePicker, Form, Input, InputNumber, Row, TimePicker } from 'antd'
 import React, { FC, useEffect, useState } from 'react'
-import { ICreateEntry } from '@/models/models'
+import { ICreateEntry, IEntry } from '@/models/models'
 import { useActions } from '@/hooks/actions'
 import { useAppSelector } from '@/hooks/redux'
 import dayjs from 'dayjs'
@@ -10,27 +10,28 @@ interface IProps {
 }
 
 const FormCreateEntry: FC<IProps> = ({ currentDay }) => {
-    const { createEntryFetch, setIsFetching, updateEntryFetch } = useActions()
+    const { createEntryFetch, setIsFetching, updateEntryFetch, setIsNew, setUpdateEntry } = useActions()
     const { activeUser } = useAppSelector(state => state.login)
     const { isNew, updateEntry } = useAppSelector(state => state.entries)
 
-    // const [clientName, setClientName] = useState('')
-
-    // useEffect(() => {
-    //     setClientName(updateEntry.clientName)
-    // }, [updateEntry])
-
-    console.log('updateEntry', updateEntry)
-
     const [form] = Form.useForm()
+
+    const clearForm: () => void = () => {
+        setIsFetching(true)
+        form.resetFields()
+        setUpdateEntry({} as IEntry)
+        setIsNew(true)
+    }
+
+    useEffect(() => {
+        form.resetFields()
+    }, [updateEntry])
 
     const onFinish = (values: ICreateEntry) => {
         isNew
             ? createEntryFetch({ ...values, master: activeUser._id })
             : updateEntryFetch({ ...values, master: activeUser._id, updateEntryId: updateEntry._id })
-
-        setIsFetching(true)
-        form.resetFields()
+        clearForm()
     }
 
     const { TextArea } = Input
@@ -45,18 +46,12 @@ const FormCreateEntry: FC<IProps> = ({ currentDay }) => {
             form={form}
         >
             <Form.Item
-                // initialValue={!isNew ? updateEntry.clientName : null}
-                // initialValue={clientName}
+                initialValue={updateEntry.clientName}
                 label='Имя клиента'
                 name='clientName'
                 rules={[{ required: true, message: 'Пожалуйста укажите имя клиента!' }]}
             >
-                <Input
-                    autoComplete='off'
-                    value={updateEntry.clientName}
-                    // prefix={<UserOutlined className='site-form-item-icon' />}
-                    placeholder='Имя клиента'
-                />
+                <Input autoComplete='off' placeholder='Имя клиента' />
             </Form.Item>
 
             <Form.Item
@@ -65,30 +60,28 @@ const FormCreateEntry: FC<IProps> = ({ currentDay }) => {
                 initialValue={currentDay ? dayjs(currentDay) : null}
                 rules={[{ required: true, message: 'Укажите дату сеанса!' }]}
             >
-                {/* {props.currentDay ? <DatePicker ={dayjs(props.currentDay)} /> : <DatePicker />} */}
                 <DatePicker />
             </Form.Item>
-            <Form.Item label='Время сеанса' name='time' rules={[{ required: true, message: 'Укажите время сеанса!' }]}>
+            <Form.Item
+                label='Время сеанса'
+                name='time'
+                rules={[{ required: true, message: 'Укажите время сеанса!' }]}
+                initialValue={!isNew ? dayjs(updateEntry.time) : null}
+            >
                 <TimePicker />
             </Form.Item>
 
             <Form.Item
                 label='Длительность:'
                 name='duration'
+                initialValue={updateEntry.duration}
                 rules={[{ required: true, message: 'Укажите продолжительность часов!' }]}
             >
                 <InputNumber placeholder='в часах' min={1} max={12} />
             </Form.Item>
 
-            <Form.Item
-                label='Описание'
-                name='description'
-                // rules={[{ required: true, message: 'Пожалуйста введите пароль!' }]}
-            >
-                <TextArea
-                    // autoComplete='off'
-                    placeholder='Описание'
-                />
+            <Form.Item label='Описание' name='description' initialValue={updateEntry.description}>
+                <TextArea placeholder='Описание' />
             </Form.Item>
             <Row justify={'center'}>
                 <Form.Item>
