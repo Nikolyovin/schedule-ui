@@ -3,15 +3,16 @@ import React from 'react'
 import 'moment/locale/ru'
 import RU from 'antd/lib/locale/ru_RU'
 import { ConfigProvider } from 'antd'
+// import 'antd/dist/antd.css'
 
 const Home = () => {
-  return (
-    // <ConfigProvider locale={RU}>
-    <HomePage />
-    // </ConfigProvider>
-  )
+    return (
+        // <ConfigProvider locale={RU}>
+        <HomePage />
+        // </ConfigProvider>
+    )
 
-  // return <div>error</div>
+    // return <div>error</div>
 }
 
 export default Home

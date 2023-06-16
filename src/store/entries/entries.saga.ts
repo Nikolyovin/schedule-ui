@@ -34,7 +34,6 @@ function* removeEntry({ payload }: PayloadAction<string>): any {
 }
 
 function* updateEntry({ payload }: PayloadAction<IUpdateEntry>): any {
-    console.log('payload', payload)
     const { clientName, date, description, duration, master, time, updateEntryId } = payload
     const response = yield call(() =>
         EntryService.update(updateEntryId, { clientName, date, description, duration, master, time })

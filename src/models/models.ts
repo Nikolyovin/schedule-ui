@@ -1,3 +1,5 @@
+import { Color } from 'antd/es/color-picker'
+
 export interface ILoginForm {
     username: string
     password: string
@@ -66,4 +68,20 @@ export interface IUpdateEntry {
     duration: number
     description: string
     updateEntryId: string
+}
+
+export interface IUpdateUser {
+    login: string
+    password: string
+    name: string
+    color: string | Color
+    // color: string
+}
+
+export interface IUpdateUserPayload {
+    login: string
+    password: string
+    name: string
+    color: string | Color
+    userId: string
 }
