@@ -15,8 +15,11 @@ function* updateUser({ payload }: PayloadAction<IUpdateUserPayload>): any {
     yield put(loginActions.getUsersFetch())
 }
 
+function updateUserAvatar({ payload }: PayloadAction<File>): any {}
+
 function* settingsSaga() {
-    yield takeLeading('settings/updateUserFetch', updateUser)
+    yield takeLeading('settings/updateUserFetch', updateUser),
+        yield takeLeading('settings/updateAvatarUserFetch', updateUserAvatar)
 }
 
 export default settingsSaga

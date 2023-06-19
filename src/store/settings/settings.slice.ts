@@ -21,6 +21,12 @@ export const settingsSlice = createSlice({
         updateUserSuccess(state) {
             // state.isUpdate = true
             state.isLoading = false
+        },
+        updateAvatarUserFetch(state, action: PayloadAction<File>) {
+            state.isLoading = true
+        },
+        updateAvatarUserSuccess(state, action: PayloadAction<File>) {
+            state.isLoading = false
         }
         // setUpdateActiveUser(state, action: PayloadAction<string>) {}
     }

@@ -2,10 +2,9 @@ import { URL_SERVER } from '@/common'
 import { useAppSelector } from '@/hooks/redux'
 import { Avatar, Button, Dropdown, Layout, MenuProps } from 'antd'
 import Image from 'next/image'
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC } from 'react'
 import { useActions } from '@/hooks/actions'
 import { IUser } from '@/models/models'
-import { PlusCircleOutlined, UserOutlined } from '@ant-design/icons'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import TheAvatar from '@/components/common/TheAvatar'
@@ -21,14 +20,24 @@ const Header: FC = () => {
         })
     }
 
+    const pushCalendar: () => void = () => {
+        router.push({
+            pathname: '/'
+        })
+    }
+
     const items: MenuProps['items'] = [
         {
             key: '1',
-            label: <span onClick={() => setActiveUser({} as IUser)}>Выйти</span>
+            label: <span onClick={() => pushCalendar()}>Календарь</span>
         },
         {
             key: '2',
             label: <span onClick={() => pushSettings()}>Настройки</span>
+        },
+        {
+            key: '3',
+            label: <span onClick={() => setActiveUser({} as IUser)}>Выйти</span>
         }
     ]
 
