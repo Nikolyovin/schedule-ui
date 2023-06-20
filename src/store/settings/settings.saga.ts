@@ -20,13 +20,7 @@ function* updateUserAvatar({ payload }: PayloadAction<IUpdateAvatarUserPayload>)
     let formData = new FormData()
     formData.append('picture', picture)
 
-    // const response = yield call(() => UserService.updatePicture(userId, formData))
-    const response = yield call(() =>
-        fetch(`${URL_SERVER}api/users/${userId}`, {
-            method: 'PUT',
-            body: formData
-        })
-    )
+    const response = yield call(() => UserService.updatePicture(userId, formData))
     const formattedResponse = yield response.json()
 
     yield put(loginActions.setActiveUser(formattedResponse))

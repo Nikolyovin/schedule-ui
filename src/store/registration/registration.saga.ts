@@ -3,6 +3,7 @@ import { call, put, takeEvery, takeLatest } from 'redux-saga/effects'
 import { PayloadAction } from '@reduxjs/toolkit'
 import { ICreateUser } from '@/models/models'
 import { registrationActions } from './registration.slice'
+import UserService from '@/services/UserService'
 
 function* workCreateUser({ payload }: PayloadAction<ICreateUser>): any {
     let formData = new FormData()
@@ -13,12 +14,7 @@ function* workCreateUser({ payload }: PayloadAction<ICreateUser>): any {
     formData.append('password', payload.password)
     formData.append('color', payload.color)
 
-    const response = yield call(() =>
-        fetch(`${URL_SERVER}api/users`, {
-            method: 'POST',
-            body: formData
-        })
-    )
+    const response = yield call(() => UserService.create(formData))
     yield put(registrationActions.createUserSuccess())
     yield put(registrationActions.isPushChange(true))
 }
