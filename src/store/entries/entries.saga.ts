@@ -1,7 +1,6 @@
 import { PayloadAction } from '@reduxjs/toolkit'
-import { call, put, takeEvery, takeLatest, takeLeading } from 'redux-saga/effects'
-import { ICreateEntry, IEntry, IUpdateEntry } from '@/models/models'
-import { URL_SERVER } from '@/common'
+import { call, put, takeEvery, takeLeading } from 'redux-saga/effects'
+import { ICreateEntry, IUpdateEntry } from '@/models/models'
 import { entriesActions } from './entries.slice'
 import EntryService from '@/services/EntryService'
 
