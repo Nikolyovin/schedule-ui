@@ -85,3 +85,8 @@ export interface IUpdateUserPayload {
     color: string | Color
     userId: string
 }
+
+export interface IUpdateAvatarUserPayload {
+    userId: string
+    picture: File
+}

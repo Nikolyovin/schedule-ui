@@ -1,4 +1,4 @@
-import { IUpdateUserPayload } from '@/models/models'
+import { IUpdateAvatarUserPayload, IUpdateUserPayload } from '@/models/models'
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
 interface InitialStateType {
@@ -22,10 +22,10 @@ export const settingsSlice = createSlice({
             // state.isUpdate = true
             state.isLoading = false
         },
-        updateAvatarUserFetch(state, action: PayloadAction<File>) {
+        updateAvatarUserFetch(state, action: PayloadAction<IUpdateAvatarUserPayload>) {
             state.isLoading = true
         },
-        updateAvatarUserSuccess(state, action: PayloadAction<File>) {
+        updateAvatarUserSuccess(state) {
             state.isLoading = false
         }
         // setUpdateActiveUser(state, action: PayloadAction<string>) {}

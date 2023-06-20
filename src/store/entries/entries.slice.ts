@@ -69,7 +69,6 @@ export const entriesSlice = createSlice({
             state.isLoading = false
         },
         updateEntryFetch(state, action: PayloadAction<IUpdateEntry>) {
-            // console.log('action', action)
             state.isNew = false
             state.isLoading = true
         },

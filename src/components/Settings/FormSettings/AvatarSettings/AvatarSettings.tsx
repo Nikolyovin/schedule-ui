@@ -1,9 +1,15 @@
 import TheAvatar from '@/components/common/TheAvatar'
+import { useActions } from '@/hooks/actions'
 import { EditOutlined } from '@ant-design/icons'
 import { Button } from 'antd'
-import React, { MutableRefObject, useRef } from 'react'
+import React, { FC, MutableRefObject, useRef } from 'react'
 
-const AvatarSettings = () => {
+interface IProps {
+    activeUserId: string
+}
+
+const AvatarSettings: FC<IProps> = ({ activeUserId }) => {
+    const { updateAvatarUserFetch } = useActions()
     const filePicker = useRef<HTMLInputElement>(null) as MutableRefObject<HTMLInputElement>
 
     const handlePick = () => {
@@ -12,8 +18,7 @@ const AvatarSettings = () => {
 
     const handleUpload = (e: any) => {
         // React.FormEvent<HTMLInputElement> не успокоил ts  пришлось any
-        // setImg(e.target.files[0])
-        console.log('img', e.target.files[0])
+        updateAvatarUserFetch({ userId: activeUserId, picture: e.target.files[0] })
     }
     return (
         <>
@@ -25,7 +30,6 @@ const AvatarSettings = () => {
                 ref={filePicker}
                 type='file'
                 onChange={handleUpload}
-                // defaultValue={defaultImg}
                 accept='image/*,.png,.jpg,.gif,.web'
                 className='opacity-0 w-0 h-0 leading-[0px] overflow-hidden p-0 m-0 '
             />

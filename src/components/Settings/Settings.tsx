@@ -8,7 +8,7 @@ import FormSettings from './FormSettings/FormSettings'
 import AvatarSettings from './FormSettings/AvatarSettings/AvatarSettings'
 
 const Settings = () => {
-    const { activeUser, users } = useAppSelector(state => state.login)
+    const { activeUser } = useAppSelector(state => state.login)
     const router = useRouter()
 
     useEffect(() => {
@@ -25,7 +25,7 @@ const Settings = () => {
             <div className='min-h-[calc(100vh-64px)] w-[100%] flex justify-center  bg-slate-50'>
                 <Card title='Мои настройки' style={{ width: 700, maxHeight: 750, marginTop: 50 }}>
                     {/* <Dropdown> */}
-                    <AvatarSettings />
+                    <AvatarSettings activeUserId={activeUser._id} />
                     {/* <Button type='primary' shape='circle' icon={<EditOutlined />} /> */}
                     {/* </Dropdown> */}
                     <FormSettings activeUser={activeUser} />

@@ -12,8 +12,6 @@ interface IProps {
 
 const TheCard: FC<IProps> = ({ entry, master }) => {
     const { activeUser } = useAppSelector(state => state.login)
-    console.log('entry.master', entry.master)
-    console.log('master.id', master._id)
     return (
         <Card headStyle={{ backgroundColor: master.color, border: 0 }} className='w-[800px] mt-3' title={master.name}>
             <div className='flex mb-1'>

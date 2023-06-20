@@ -38,8 +38,6 @@ export const loginSlice = createSlice({
     initialState,
     reducers: {
         setActiveUser(state, action: PayloadAction<IUser>) {
-            console.log('ты в слайсе', action.payload)
-
             state.activeUser = action.payload
             localStorage.setItem(LS_ACTIVE_USER_KEY, JSON.stringify(state.activeUser))
         },
