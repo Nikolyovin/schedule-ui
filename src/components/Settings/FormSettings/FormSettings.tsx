@@ -8,6 +8,7 @@ import { Color } from 'antd/es/color-picker'
 import dynamic from 'next/dynamic'
 import { useAppSelector } from '@/hooks/redux'
 import { useActions } from '@/hooks/actions'
+import ColorPickerForm from '@/components/common/ColorPickerForm'
 
 interface IProps {
     activeUser: IUser
@@ -16,8 +17,8 @@ interface IProps {
 const FormSettings: FC<IProps> = ({ activeUser }) => {
     const [color, setColor] = useState<Color | string>(activeUser.color)
     const { isLoading } = useAppSelector(state => state.settings)
-    const { users } = useAppSelector(state => state.login)
-    const { updateUserFetch, getUsersFetch, setActiveUser } = useActions()
+    // const { users } = useAppSelector(state => state.login)
+    const { updateUserFetch } = useActions()
 
     const onFinish: (values: IUpdateUser) => void = values => {
         const colorHex = typeof values.color === 'string' ? values.color : values.color.toHexString()
@@ -76,22 +77,8 @@ const FormSettings: FC<IProps> = ({ activeUser }) => {
                         size='large'
                     />
                 </Form.Item>
-                <Form.Item
-                    label='Цвет'
-                    name='color'
-                    initialValue={color}
 
-                    // rules={[{ message: 'Пожалуйста выберите цвет!' }]}
-                >
-                    <ColorPicker
-                        onChange={setColor}
-                        value={color}
-                        // format='hex'
-                        // showValue
-                        // defaultValue={color}
-                        // defaultValue={activeUser.color}
-                    />
-                </Form.Item>
+                <ColorPickerForm color={color} setColor={setColor} />
 
                 <Row justify={'center'}>
                     <Form.Item wrapperCol={{ span: 18 }}>

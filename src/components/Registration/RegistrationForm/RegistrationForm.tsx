@@ -1,23 +1,25 @@
-import { COLORS } from '@/common'
+import { COLORS, DEFAULT_COLOR } from '@/common'
+import ColorPickerForm from '@/components/common/ColorPickerForm'
 import { useActions } from '@/hooks/actions'
 import { useAppSelector } from '@/hooks/redux'
 import { IRegistrationForm } from '@/models/models'
 import { LockOutlined, UploadOutlined, UserOutlined } from '@ant-design/icons'
-import { Button, Form, Input, Row, Select, Spin } from 'antd'
+import { Button, Form, Input, Row, Select, Spin, ColorPicker } from 'antd'
+import { Color } from 'antd/es/color-picker'
+import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { ChangeEvent, ChangeEventHandler, FC, MutableRefObject, useEffect, useRef, useState } from 'react'
 
 //в useState сделать дефолтный аватар
 
 const RegistrationForm: FC = () => {
-    const [color, setColor] = useState<string>('white')
+    const { isLoading, isPush } = useAppSelector(state => state.registration)
+    const { users } = useAppSelector(state => state.login)
+    const [color, setColor] = useState<Color | string>(DEFAULT_COLOR)
     const [img, setImg] = useState<File | null>(null)
     const [text, setText] = useState<string>('')
 
     const { createUserFetch, getUsersFetch } = useActions()
-
-    const { isLoading, isPush } = useAppSelector(state => state.registration)
-    const { users } = useAppSelector(state => state.login)
 
     const router = useRouter()
 
@@ -32,14 +34,16 @@ const RegistrationForm: FC = () => {
     }, [isPush])
 
     const onFinish = (values: IRegistrationForm) => {
-        createUserFetch({ ...values, color, picture: img })
+        console.log(values)
+
+        const colorHex = typeof values.color === 'string' ? values.color : values.color.toHexString()
+        console.log(colorHex)
+        // createUserFetch({ ...values, color: colorHex, picture: img })
     }
 
     const onChangeInputLogin = (e: ChangeEvent<HTMLInputElement>) => {
         setText(e.target.value)
     }
-
-    const handleChange = (value: string) => setColor(value)
 
     const handleUpload = (e: any) => {
         // React.FormEvent<HTMLInputElement> не успокоил ts  пришлось any
@@ -103,17 +107,7 @@ const RegistrationForm: FC = () => {
                     />
                 </Form.Item>
 
-                <Form.Item
-                    label='Аватар'
-                    name='picture'
-                    // valuePropName='fileList'
-                    // getValueFromEvent={getFile}
-                    // rules={[{ required: true, message: 'Пожалуйста введите пароль!' }]}
-                >
-                    {/* <div className='flex items-center'> */}
-                    {/* <Upload maxCount={1} listType={'picture'} onClick={handlePick}>
-            <Button icon={<UploadOutlined />}>Click</Button>
-          </Upload> */}
+                <Form.Item label='Аватар' name='picture'>
                     <Button onClick={handlePick} icon={<UploadOutlined />}>
                         Click
                     </Button>
@@ -131,22 +125,7 @@ const RegistrationForm: FC = () => {
                     className='opacity-0 w-0 h-0 leading-[0px] overflow-hidden p-0 m-0 '
                 />
 
-                <Form.Item label='Цвет' name='color' rules={[{ message: 'Пожалуйста выберите цвет!' }]}>
-                    <div className='flex items-center'>
-                        <Select
-                            value={color}
-                            onChange={handleChange}
-                            options={COLORS}
-                            style={{ width: '83%' }}
-                            //     : { backgroundColor: 'white', width: 120 }
-                            // }
-                        />
-                        <div
-                            className='rounded-full w-[25px] h-[25px] ml-2 justify-center'
-                            style={color ? { backgroundColor: color } : { backgroundColor: 'white' }}
-                        ></div>
-                    </div>
-                </Form.Item>
+                <ColorPickerForm color={color} setColor={setColor} />
 
                 <Row justify={'center'}>
                     <Form.Item wrapperCol={{ span: 18 }}>
@@ -160,4 +139,5 @@ const RegistrationForm: FC = () => {
     )
 }
 
-export default RegistrationForm
+// export default RegistrationForm
+export default dynamic(() => Promise.resolve(RegistrationForm), { ssr: false })

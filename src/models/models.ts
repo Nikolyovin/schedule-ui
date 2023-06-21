@@ -10,7 +10,7 @@ export interface IRegistrationForm {
     // username: string
     password: string
     name: string
-    color: string
+    color: string | Color
 }
 
 export interface ISelectColor {
