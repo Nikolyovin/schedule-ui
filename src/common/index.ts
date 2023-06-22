@@ -58,5 +58,6 @@ export enum NotificDescrip {
     UPDATE_USER_PHOTO = 'Фотография пользователя успешно изменена!',
     CREATE_ENTRY = 'Новая запись успешно добавлена!',
     REMOVE_ENTRY = 'Запись удалена!',
-    UPDATE_ENTRY = 'Запись обновлена'
+    UPDATE_ENTRY = 'Запись обновлена',
+    CREATE_USER = 'Новый пользователь создан!'
 }

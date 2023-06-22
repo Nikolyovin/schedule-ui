@@ -24,7 +24,7 @@ const Content = () => {
     }
 
     return (
-        <Layout.Content style={{ padding: '0 20px' }}>
+        <Layout.Content style={{ padding: '0 20px', height: '100vh' }}>
             <NotificationApp />
             <CalendarAll />
             <div className='my-3 text-center'>

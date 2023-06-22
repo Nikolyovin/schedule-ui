@@ -1,5 +1,6 @@
 import { COLORS, DEFAULT_COLOR } from '@/common'
 import ColorPickerForm from '@/components/common/ColorPickerForm'
+import NotificationApp from '@/components/common/NotificationApp'
 import { useActions } from '@/hooks/actions'
 import { useAppSelector } from '@/hooks/redux'
 import { IRegistrationForm } from '@/models/models'
@@ -37,8 +38,8 @@ const RegistrationForm: FC = () => {
         console.log(values)
 
         const colorHex = typeof values.color === 'string' ? values.color : values.color.toHexString()
-        console.log(colorHex)
-        // createUserFetch({ ...values, color: colorHex, picture: img })
+        // console.log(colorHex)
+        createUserFetch({ ...values, color: colorHex, picture: img })
     }
 
     const onChangeInputLogin = (e: ChangeEvent<HTMLInputElement>) => {
@@ -59,6 +60,7 @@ const RegistrationForm: FC = () => {
 
     return (
         <Spin spinning={isLoading} tip='Loading' size='large'>
+            <NotificationApp />
             <Form
                 onFinish={onFinish}
                 name='registration'
