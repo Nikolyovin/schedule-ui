@@ -1,14 +1,15 @@
 import React, { FC, useEffect, useState } from 'react'
-import { LockOutlined, UploadOutlined, UserOutlined } from '@ant-design/icons'
+import { LockOutlined, SmileOutlined, UploadOutlined, UserOutlined } from '@ant-design/icons'
 // import { COLORS } from '@/common'
-import { ColorPicker } from 'antd'
+import { ColorPicker, notification } from 'antd'
 import { Button, Card, Form, Input, Row, Select, Spin } from 'antd'
-import { IUpdateUser, IUser } from '@/models/models'
+import { IUpdateUser, IUser, NotificationType } from '@/models/models'
 import { Color } from 'antd/es/color-picker'
 import dynamic from 'next/dynamic'
 import { useAppSelector } from '@/hooks/redux'
 import { useActions } from '@/hooks/actions'
 import ColorPickerForm from '@/components/common/ColorPickerForm'
+import NotificationApp from '@/components/common/NotificationApp'
 
 interface IProps {
     activeUser: IUser
@@ -19,13 +20,27 @@ const FormSettings: FC<IProps> = ({ activeUser }) => {
     const { isLoading } = useAppSelector(state => state.settings)
     const { updateUserFetch } = useActions()
 
+    // const [api, contextHolder] = notification.useNotification()
+
+    // const openNotification = () => {
+    //     api.open({
+    //         message: 'Notification Title',
+    //         description:
+    //             'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
+    //         icon: <SmileOutlined style={{ color: '#108ee9' }} />
+    //     })
+    // }
+
     const onFinish: (values: IUpdateUser) => void = values => {
         const colorHex = typeof values.color === 'string' ? values.color : values.color.toHexString()
         updateUserFetch({ ...values, color: colorHex, userId: activeUser._id })
+        // openNotification()
     }
 
     return (
         <Spin spinning={isLoading} tip='Loading' size='large'>
+            {/* {contextHolder} */}
+            <NotificationApp />
             <Form onFinish={onFinish} name='registration' layout='vertical'>
                 <Form.Item
                     label='Логин'

@@ -39,3 +39,21 @@ export const COLORS = {
         '#9e9e9e'
     ]
 }
+
+export enum NotificationTypeEnum {
+    SUCCESS = 'success',
+    INFO = 'info',
+    WARNING = 'warning',
+    ERROR = 'error'
+}
+
+export enum NotificationMessage {
+    SUCCESS = 'Успешно!',
+    WARNING = 'Внимание!',
+    ERROR = 'Ошибка!'
+}
+
+export enum NotificationDescription {
+    UPDATE_USER_SUCCESS = 'Настройки пользователя успешно сохранены!',
+    UPDATE_USER_PHOTO_SUCCESS = 'Фотография пользователя успешно изменена!'
+}

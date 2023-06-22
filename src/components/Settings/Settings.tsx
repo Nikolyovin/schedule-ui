@@ -24,10 +24,7 @@ const Settings = () => {
             <Header />
             <div className='min-h-[calc(100vh-64px)] w-[100%] flex justify-center  bg-slate-50'>
                 <Card title='Мои настройки' style={{ width: 700, maxHeight: 750, marginTop: 50 }}>
-                    {/* <Dropdown> */}
                     <AvatarSettings activeUserId={activeUser._id} />
-                    {/* <Button type='primary' shape='circle' icon={<EditOutlined />} /> */}
-                    {/* </Dropdown> */}
                     <FormSettings activeUser={activeUser} />
                 </Card>
             </div>

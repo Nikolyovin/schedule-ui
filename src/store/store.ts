@@ -5,6 +5,7 @@ import { registrationReducer } from './registration/registration.slice'
 import rootSaga from './rootSaga'
 import { entriesReducer } from './entries/entries.slice'
 import { settingsReducer } from './settings/settings.slice'
+import { commonReducer } from './common/common.slice'
 
 const saga = createSagaMiddleware()
 
@@ -13,7 +14,8 @@ export const store = configureStore({
         login: loginReducer,
         registration: registrationReducer,
         entries: entriesReducer,
-        settings: settingsReducer
+        settings: settingsReducer,
+        common: commonReducer
     },
     middleware: [saga]
 })

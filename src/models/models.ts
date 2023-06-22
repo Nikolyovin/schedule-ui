@@ -90,3 +90,11 @@ export interface IUpdateAvatarUserPayload {
     userId: string
     picture: File
 }
+
+export type NotificationType = 'success' | 'info' | 'warning' | 'error'
+
+export interface INotificationData {
+    type: NotificationType
+    message: string
+    description: string | unknown
+}

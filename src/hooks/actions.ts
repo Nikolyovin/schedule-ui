@@ -1,3 +1,4 @@
+import { commonActions } from '@/store/common/common.slice'
 import { entriesActions } from '@/store/entries/entries.slice'
 import { loginActions } from '@/store/login/login.slice'
 import { registrationActions } from '@/store/registration/registration.slice'
@@ -9,7 +10,8 @@ const actions = {
     ...loginActions,
     ...registrationActions,
     ...entriesActions,
-    ...settingsActions
+    ...settingsActions,
+    ...commonActions
 }
 
 export const useActions = () => {
