@@ -4,6 +4,7 @@ import FormCreateEntry from './ModalCreateEntry/FormCreateEntry/FormCreateEntry'
 import { useActions } from '@/hooks/actions'
 import { useAppSelector } from '@/hooks/redux'
 import CalendarAll from './CalendarAll/CalendarAll'
+import NotificationApp from '@/components/common/NotificationApp'
 
 const Content = () => {
     // const [isModalOpen, setIsModalOpen] = useState(false)
@@ -24,6 +25,7 @@ const Content = () => {
 
     return (
         <Layout.Content style={{ padding: '0 20px' }}>
+            <NotificationApp />
             <CalendarAll />
             <div className='my-3 text-center'>
                 <Button type='primary' onClick={showModal}>

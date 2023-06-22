@@ -40,20 +40,23 @@ export const COLORS = {
     ]
 }
 
-export enum NotificationTypeEnum {
+export enum NotificType {
     SUCCESS = 'success',
     INFO = 'info',
     WARNING = 'warning',
     ERROR = 'error'
 }
 
-export enum NotificationMessage {
+export enum NotificMes {
     SUCCESS = 'Успешно!',
     WARNING = 'Внимание!',
     ERROR = 'Ошибка!'
 }
 
-export enum NotificationDescription {
-    UPDATE_USER_SUCCESS = 'Настройки пользователя успешно сохранены!',
-    UPDATE_USER_PHOTO_SUCCESS = 'Фотография пользователя успешно изменена!'
+export enum NotificDescrip {
+    UPDATE_USER = 'Настройки пользователя успешно сохранены!',
+    UPDATE_USER_PHOTO = 'Фотография пользователя успешно изменена!',
+    CREATE_ENTRY = 'Новая запись успешно добавлена!',
+    REMOVE_ENTRY = 'Запись удалена!',
+    UPDATE_ENTRY = 'Запись обновлена'
 }

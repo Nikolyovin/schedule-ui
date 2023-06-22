@@ -96,5 +96,5 @@ export type NotificationType = 'success' | 'info' | 'warning' | 'error'
 export interface INotificationData {
     type: NotificationType
     message: string
-    description: string | unknown
+    description: string
 }

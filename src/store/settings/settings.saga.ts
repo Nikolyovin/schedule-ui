@@ -4,9 +4,8 @@ import { PayloadAction } from '@reduxjs/toolkit'
 import { call, put, takeLeading } from 'redux-saga/effects'
 import { settingsActions } from './settings.slice'
 import { loginActions } from '../login/login.slice'
-import { NotificationDescription, NotificationMessage, NotificationTypeEnum, URL_SERVER } from '@/common'
+import { NotificDescrip, NotificMes, NotificType, URL_SERVER } from '@/common'
 import { commonActions } from '../common/common.slice'
-import { notification } from 'antd'
 
 function* updateUser({ payload }: PayloadAction<IUpdateUserPayload>): any {
     try {
@@ -16,16 +15,16 @@ function* updateUser({ payload }: PayloadAction<IUpdateUserPayload>): any {
         yield put(loginActions.setActiveUser(response.data))
         yield put(loginActions.getUsersFetch())
         const notificationData = {
-            type: NotificationTypeEnum.SUCCESS,
-            message: NotificationMessage.SUCCESS,
-            description: NotificationDescription.UPDATE_USER_SUCCESS
+            type: NotificType.SUCCESS,
+            message: NotificMes.SUCCESS,
+            description: NotificDescrip.UPDATE_USER
         }
         yield put(commonActions.setNotificationData(notificationData))
         yield put(commonActions.setIsShowNotification(true))
     } catch (e: any) {
         const notificationError = {
-            type: NotificationTypeEnum.ERROR,
-            message: NotificationMessage.ERROR,
+            type: NotificType.ERROR,
+            message: NotificMes.ERROR,
             description: `${e.name}: ${e.message}`
         }
         yield put(commonActions.setNotificationData(notificationError))
@@ -47,16 +46,16 @@ function* updateUserAvatar({ payload }: PayloadAction<IUpdateAvatarUserPayload>)
         yield put(settingsActions.updateAvatarUserSuccess())
 
         const notificationData = {
-            type: NotificationTypeEnum.SUCCESS,
-            message: NotificationMessage.SUCCESS,
-            description: NotificationDescription.UPDATE_USER_PHOTO_SUCCESS
+            type: NotificType.SUCCESS,
+            message: NotificMes.SUCCESS,
+            description: NotificDescrip.UPDATE_USER_PHOTO
         }
         yield put(commonActions.setNotificationData(notificationData))
         yield put(commonActions.setIsShowNotification(true))
     } catch (e: any) {
         const notificationError = {
-            type: NotificationTypeEnum.ERROR,
-            message: NotificationMessage.ERROR,
+            type: NotificType.ERROR,
+            message: NotificMes.ERROR,
             description: `${e.name}: ${e.message}`
         }
         yield put(commonActions.setNotificationData(notificationError))

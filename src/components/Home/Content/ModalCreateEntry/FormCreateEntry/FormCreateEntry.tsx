@@ -80,7 +80,12 @@ const FormCreateEntry: FC<IProps> = ({ currentDay }) => {
                 <InputNumber placeholder='в часах' min={1} max={12} />
             </Form.Item>
 
-            <Form.Item label='Описание' name='description' initialValue={updateEntry.description}>
+            <Form.Item
+                label='Описание'
+                name='description'
+                rules={[{ required: true, message: 'Пожалуйста заполните поле!' }]}
+                initialValue={updateEntry.description}
+            >
                 <TextArea placeholder='Описание' />
             </Form.Item>
             <Row justify={'center'}>

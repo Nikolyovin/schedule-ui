@@ -9,6 +9,7 @@ import FormCreateEntry from '../Home/Content/ModalCreateEntry/FormCreateEntry/Fo
 import moment from 'moment'
 import dynamic from 'next/dynamic'
 import { IEntry } from '@/models/models'
+import NotificationApp from '../common/NotificationApp'
 
 const Day: FC = () => {
     const { entries, currentDay, isFetching, isModalOpen } = useAppSelector(state => state.entries)
@@ -42,6 +43,7 @@ const Day: FC = () => {
         <>
             <Header />
             <div className='bg-slate-50 min-h-[calc(100vh-64px)]'>
+                <NotificationApp />
                 <p className='capitalize text-center pt-5 text-2xl '>{formattedDate}</p>
                 <div className=' flex flex-col justify-center items-center p-5'>
                     <Cards entries={entries} users={users} />
