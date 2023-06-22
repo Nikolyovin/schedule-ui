@@ -1,3 +1,4 @@
+import { COLORS } from '@/common'
 import { ColorPicker, Form } from 'antd'
 import { Color } from 'antd/es/color-picker'
 import React, { FC, useState } from 'react'
@@ -10,7 +11,7 @@ interface IProps {
 const ColorPickerForm: FC<IProps> = ({ color, setColor }) => {
     return (
         <Form.Item label='Цвет' initialValue={color} name='color'>
-            <ColorPicker onChange={setColor} value={color} />
+            <ColorPicker presets={[COLORS]} onChange={setColor} value={color} />
         </Form.Item>
     )
 }

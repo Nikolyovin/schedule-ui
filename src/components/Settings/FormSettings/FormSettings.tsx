@@ -17,7 +17,6 @@ interface IProps {
 const FormSettings: FC<IProps> = ({ activeUser }) => {
     const [color, setColor] = useState<Color | string>(activeUser.color)
     const { isLoading } = useAppSelector(state => state.settings)
-    // const { users } = useAppSelector(state => state.login)
     const { updateUserFetch } = useActions()
 
     const onFinish: (values: IUpdateUser) => void = values => {
@@ -27,14 +26,7 @@ const FormSettings: FC<IProps> = ({ activeUser }) => {
 
     return (
         <Spin spinning={isLoading} tip='Loading' size='large'>
-            <Form
-                onFinish={onFinish}
-                name='registration'
-                // style={{ height: 190 }}
-                // labelCol={{ span: 8 }}
-                // wrapperCol={{ span: 16 }}
-                layout='vertical'
-            >
+            <Form onFinish={onFinish} name='registration' layout='vertical'>
                 <Form.Item
                     label='Логин'
                     name='login'

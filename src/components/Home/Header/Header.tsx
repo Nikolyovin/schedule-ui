@@ -44,8 +44,11 @@ const Header: FC = () => {
     return (
         <Layout.Header>
             <div className='flex justify-between items-center h-full'>
-                <div className='bg-slate-300 bordeer rounded-full w-10 '></div>
-                <span className='text-white text-lg'>{activeUser.name}</span>
+                <div className='bg-slate-300 border rounded-full w-10 '></div>
+                <div className='flex justify-center items-center'>
+                    <div style={{ backgroundColor: activeUser.color }} className='rounded-full h-3 w-3 mr-1'></div>
+                    <span className='text-white text-lg '>{activeUser.name}</span>
+                </div>
                 <Dropdown arrow trigger={['click']} menu={{ items }}>
                     <div>
                         <TheAvatar size={40} />
