@@ -84,3 +84,26 @@ select {
   display: none;
 }
 
+.ant-picker-calendar-header {
+  /* height: 48px; */
+  /* background-color: rgb(241 245 249); */
+  margin: 0 15px 5px 0;
+  /* border-bottom: 3px solid rgb(241 245 249); */
+}
+
+/* class="ant-picker-cell ant-picker-cell-in-view" */
+
+/* 'ant-picker-cell-inner ant-picker-calendar-date' */
+/* ant-picker-calendar-date-content */
+/* .ant-picker-calendar-date-content{
+  display: block;
+  box-sizing: border-box;
+  height: 350px;
+  background-color: aqua;
+} */
+
+.ant-picker-calendar.ant-picker-calendar-full .ant-picker-calendar-date-content {
+  height: 100px;
+}
+
+
