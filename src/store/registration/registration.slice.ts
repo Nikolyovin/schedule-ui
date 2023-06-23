@@ -23,6 +23,7 @@ export const registrationSlice = createSlice({
         },
         createUserSuccess(state) {
             state.isLoading = false
+            state.isPush = true
         },
         isPushChange(state, action: PayloadAction<boolean>) {
             state.isPush = action.payload
