@@ -1,6 +1,6 @@
 import { Button, Calendar, Layout, Modal } from 'antd'
 import React, { useEffect, useState } from 'react'
-import FormCreateEntry from './ModalCreateEntry/FormCreateEntry/FormCreateEntry'
+import FormCreateEntry from '../../common/FormCreateEntry'
 import { useActions } from '@/hooks/actions'
 import { useAppSelector } from '@/hooks/redux'
 import CalendarAll from './CalendarAll/CalendarAll'

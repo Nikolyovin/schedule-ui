@@ -3,7 +3,7 @@ import { call, put, takeEvery, takeLeading } from 'redux-saga/effects'
 import { ICreateEntry, IUpdateEntry } from '@/models/models'
 import { entriesActions } from './entries.slice'
 import EntryService from '@/services/EntryService'
-import { NotificDescrip, NotificMes, NotificType } from '@/common'
+import { NotificDescrip, NotificMes, NotificType, notificationError } from '@/common'
 import { commonActions } from '../common/common.slice'
 
 function* createEntry({ payload }: PayloadAction<ICreateEntry>): any {
@@ -20,12 +20,7 @@ function* createEntry({ payload }: PayloadAction<ICreateEntry>): any {
         yield put(commonActions.setNotificationData(notificationData))
         yield put(commonActions.setIsShowNotification(true))
     } catch (e: any) {
-        const notificationError = {
-            type: NotificType.ERROR,
-            message: NotificMes.ERROR,
-            description: `${e.name}: ${e.message}`
-        }
-        yield put(commonActions.setNotificationData(notificationError))
+        yield put(commonActions.setNotificationData(notificationError(e)))
         yield put(commonActions.setIsShowNotification(true))
         console.log('error:', e)
     }
@@ -44,7 +39,6 @@ function* removeEntry({ payload }: PayloadAction<string>): any {
     try {
         const response = yield call(() => EntryService.delete(payload))
         yield put(entriesActions.removeEntrySuccess())
-
         const notificationData = {
             type: NotificType.SUCCESS,
             message: NotificMes.SUCCESS,
@@ -53,12 +47,7 @@ function* removeEntry({ payload }: PayloadAction<string>): any {
         yield put(commonActions.setNotificationData(notificationData))
         yield put(commonActions.setIsShowNotification(true))
     } catch (e: any) {
-        const notificationError = {
-            type: NotificType.ERROR,
-            message: NotificMes.ERROR,
-            description: `${e.name}: ${e.message}`
-        }
-        yield put(commonActions.setNotificationData(notificationError))
+        yield put(commonActions.setNotificationData(notificationError(e)))
         yield put(commonActions.setIsShowNotification(true))
     }
 }
@@ -80,12 +69,7 @@ function* updateEntry({ payload }: PayloadAction<IUpdateEntry>): any {
         yield put(commonActions.setNotificationData(notificationData))
         yield put(commonActions.setIsShowNotification(true))
     } catch (e: any) {
-        const notificationError = {
-            type: NotificType.ERROR,
-            message: NotificMes.ERROR,
-            description: `${e.name}: ${e.message}`
-        }
-        yield put(commonActions.setNotificationData(notificationError))
+        yield put(commonActions.setNotificationData(notificationError(e)))
         yield put(commonActions.setIsShowNotification(true))
     }
 }

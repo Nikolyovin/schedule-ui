@@ -1,4 +1,4 @@
-import { NotificDescrip, NotificMes, NotificType, URL_SERVER } from '@/common'
+import { NotificDescrip, NotificMes, NotificType, URL_SERVER, notificationError } from '@/common'
 import { call, put, takeEvery, takeLatest } from 'redux-saga/effects'
 import { PayloadAction } from '@reduxjs/toolkit'
 import { ICreateUser } from '@/models/models'
@@ -30,12 +30,7 @@ function* workCreateUser({ payload }: PayloadAction<ICreateUser>): any {
         yield put(commonActions.setNotificationData(notificationData))
         yield put(commonActions.setIsShowNotification(true))
     } catch (e: any) {
-        const notificationError = {
-            type: NotificType.ERROR,
-            message: NotificMes.ERROR,
-            description: `${e.name}: ${e.message}`
-        }
-        yield put(commonActions.setNotificationData(notificationError))
+        yield put(commonActions.setNotificationData(notificationError(e)))
         yield put(commonActions.setIsShowNotification(true))
         console.log(e)
     }

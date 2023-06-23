@@ -10,6 +10,7 @@ import { useAppSelector } from '@/hooks/redux'
 import { useActions } from '@/hooks/actions'
 import ColorPickerForm from '@/components/common/ColorPickerForm'
 import NotificationApp from '@/components/common/NotificationApp'
+import { NotificDescrip, NotificMes, NotificType } from '@/common'
 
 interface IProps {
     activeUser: IUser
@@ -18,23 +19,26 @@ interface IProps {
 const FormSettings: FC<IProps> = ({ activeUser }) => {
     const [color, setColor] = useState<Color | string>(activeUser.color)
     const { isLoading } = useAppSelector(state => state.settings)
-    const { updateUserFetch } = useActions()
+    const { setNotificationData, setIsShowNotification, updateUserFetch } = useActions()
 
-    // const [api, contextHolder] = notification.useNotification()
-
-    // const openNotification = () => {
-    //     api.open({
-    //         message: 'Notification Title',
-    //         description:
-    //             'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
-    //         icon: <SmileOutlined style={{ color: '#108ee9' }} />
-    //     })
-    // }
+    const notificationData = {
+        type: NotificType.INFO,
+        message: NotificMes.INFO,
+        description: NotificDescrip.UPDATE_USER_INFO
+    }
 
     const onFinish: (values: IUpdateUser) => void = values => {
         const colorHex = typeof values.color === 'string' ? values.color : values.color.toHexString()
-        updateUserFetch({ ...values, color: colorHex, userId: activeUser._id })
-        // openNotification()
+
+        const isNotUpdate =
+            values.name === activeUser.name &&
+            values.login === activeUser.login &&
+            colorHex === activeUser.color &&
+            values.password === activeUser.password
+
+        isNotUpdate
+            ? setNotificationData(notificationData) && setIsShowNotification(true)
+            : updateUserFetch({ ...values, color: colorHex, userId: activeUser._id })
     }
 
     return (

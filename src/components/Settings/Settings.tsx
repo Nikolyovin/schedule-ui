@@ -1,4 +1,4 @@
-import Header from '@/components/Home/Header/Header'
+import Header from '@/components/common/Header'
 import RegistrationForm from '@/components/Registration/RegistrationForm/RegistrationForm'
 import { useAppSelector } from '@/hooks/redux'
 import { Button, Card, Dropdown, Form, Input, Row, Select, Spin } from 'antd'

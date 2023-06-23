@@ -1,6 +1,6 @@
 import { Layout } from 'antd'
 import React, { FC, useEffect } from 'react'
-import Header from './Header/Header'
+import Header from '../common/Header'
 import Content from './Content/Content'
 import { useAppSelector } from '@/hooks/redux'
 import { useRouter } from 'next/router'

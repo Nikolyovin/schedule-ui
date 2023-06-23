@@ -50,7 +50,8 @@ export enum NotificType {
 export enum NotificMes {
     SUCCESS = 'Успешно!',
     WARNING = 'Внимание!',
-    ERROR = 'Ошибка!'
+    ERROR = 'Ошибка!',
+    INFO = 'Информация!'
 }
 
 export enum NotificDescrip {
@@ -59,7 +60,16 @@ export enum NotificDescrip {
     CREATE_ENTRY = 'Новая запись успешно добавлена!',
     REMOVE_ENTRY = 'Запись удалена!',
     UPDATE_ENTRY = 'Запись обновлена',
-    CREATE_USER = 'Новый пользователь создан!'
+    CREATE_USER = 'Новый пользователь создан!',
+    UPDATE_USER_INFO = 'Вы ничего не изменили!'
+}
+
+export const notificationError = (e: any) => {
+    return {
+        type: NotificType.ERROR,
+        message: NotificMes.ERROR,
+        description: `${e.name}: ${e.message}`
+    }
 }
 
 // export const HEADER_HEIGHT = 64
