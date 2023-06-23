@@ -22,7 +22,7 @@ const Settings = () => {
     return (
         <>
             <Header />
-            <div className='min-h-[calc(100vh-64px)] w-[100%] flex justify-center  bg-slate-50'>
+            <div className='min-h-[calc(100vh-var(--header-height))] w-[100%] flex justify-center  bg-slate-50'>
                 <Card title='Мои настройки' style={{ width: 700, maxHeight: 750, marginTop: 50 }}>
                     <AvatarSettings activeUserId={activeUser._id} />
                     <FormSettings activeUser={activeUser} />

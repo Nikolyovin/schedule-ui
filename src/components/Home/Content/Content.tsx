@@ -11,23 +11,22 @@ const Content = () => {
     const { setIsModalOpen } = useActions()
     const { isModalOpen } = useAppSelector(state => state.entries)
 
-    const showModal = () => {
-        setIsModalOpen(true)
-    }
+    const showModal = () => setIsModalOpen(true)
 
     // const handleOk = () => {
     //   setIsModalOpen(false)
     // }
 
-    const handleCancel = () => {
-        setIsModalOpen(false)
-    }
+    const handleCancel = () => setIsModalOpen(false)
 
+    const calcHeight = `calc(100vh-64px)`
+    // min-h-[calc(100vh-64px)]
     return (
-        <Layout.Content style={{ padding: '0 20px', height: '100vh' }}>
+        // <Layout.Content style={{ padding: '0 100px', minHeight: calcHeight }}>
+        <div className='px-[100px] min-h-[calc(100vh-var(--header-height))]'>
             <NotificationApp />
             <CalendarAll />
-            <div className='my-3 text-center'>
+            <div className='my-5 text-center absolute bottom-3 z-10 left-[50%] -translate-x-1/2'>
                 <Button type='primary' onClick={showModal}>
                     Создать
                 </Button>
@@ -42,7 +41,8 @@ const Content = () => {
             >
                 <FormCreateEntry currentDay={null} />
             </Modal>
-        </Layout.Content>
+        </div>
+        // </div>
     )
 }
 

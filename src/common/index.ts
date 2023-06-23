@@ -61,3 +61,5 @@ export enum NotificDescrip {
     UPDATE_ENTRY = 'Запись обновлена',
     CREATE_USER = 'Новый пользователь создан!'
 }
+
+// export const HEADER_HEIGHT = 64

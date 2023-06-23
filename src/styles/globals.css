@@ -71,6 +71,12 @@ textarea,
 select {
   font: inherit;
 }
+/*///////////////////ПЕРЕМЕННЫЕ ДЛЯ TAILWIND///////////////*/
+
+:root {
+  --header-height: 64px
+}
+
 
 /*/////////////////*/
 
