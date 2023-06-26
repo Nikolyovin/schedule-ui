@@ -17,20 +17,15 @@ interface InitialStateType {
     users: IUser[]
     isLoading: boolean
     activeUser: IUser
-    // currentUser: string
 }
 
 const initialState: InitialStateType = {
     auth: false,
-    // users: {} as IUser[],
-    // users: JSON.parse(localStorage.getItem(LS_USERS_KEY) ?? '[]'),
     users: getFromLocalStorage(LS_USERS_KEY) ? JSON.parse(getFromLocalStorage(LS_USERS_KEY) || '{}') : [],
     isLoading: false,
-    // activeUser: {} as IUser,
     activeUser: getFromLocalStorage(LS_ACTIVE_USER_KEY)
         ? JSON.parse(getFromLocalStorage(LS_ACTIVE_USER_KEY) || '{}')
         : []
-    // currentUser: '',
 }
 
 export const loginSlice = createSlice({
@@ -52,9 +47,6 @@ export const loginSlice = createSlice({
         setIsLoadingLogin(state, action: PayloadAction<boolean>) {
             state.isLoading = action.payload
         }
-        // setCurrentUser(state, action: PayloadAction<string>) {
-        //   state.currentUser = action.payload
-        // },
     }
 })
 

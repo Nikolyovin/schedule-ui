@@ -1,4 +1,4 @@
-import { IUpdateAvatarUserPayload, IUpdateUserPayload } from '@/models/models'
+import { IUpdateAvatarUserPayload, IUpdateUserPayload, IUser } from '@/models/models'
 import UserService from '@/services/UserService'
 import { PayloadAction } from '@reduxjs/toolkit'
 import { call, put, takeLeading } from 'redux-saga/effects'
@@ -7,20 +7,11 @@ import { loginActions } from '../login/login.slice'
 import { NotificDescrip, NotificMes, NotificType, URL_SERVER, notificationError } from '@/common'
 import { commonActions } from '../common/common.slice'
 
-function* updateUser({ payload }: PayloadAction<IUpdateUserPayload>): any {
+function* updateUserFetch({ payload }: PayloadAction<IUpdateUserPayload>): any {
     try {
         const { userId, color, login, name, password } = payload
         const response = yield call(() => UserService.update(userId, { color, login, name, password }))
-        yield put(settingsActions.updateUserSuccess())
-        yield put(loginActions.setActiveUser(response.data))
-        yield put(loginActions.getUsersFetch())
-        const notificationData = {
-            type: NotificType.SUCCESS,
-            message: NotificMes.SUCCESS,
-            description: NotificDescrip.UPDATE_USER
-        }
-        yield put(commonActions.setNotificationData(notificationData))
-        yield put(commonActions.setIsShowNotification(true))
+        yield put(settingsActions.updateUserSuccess(response.data))
     } catch (e: any) {
         yield put(commonActions.setNotificationData(notificationError(e)))
         yield put(commonActions.setIsShowNotification(true))
@@ -28,7 +19,19 @@ function* updateUser({ payload }: PayloadAction<IUpdateUserPayload>): any {
     }
 }
 
-function* updateUserAvatar({ payload }: PayloadAction<IUpdateAvatarUserPayload>): any {
+function* updateUserSuccess({ payload }: PayloadAction<IUser>): any {
+    yield put(loginActions.setActiveUser(payload))
+    yield put(loginActions.getUsersFetch())
+    const notificationData = {
+        type: NotificType.SUCCESS,
+        message: NotificMes.SUCCESS,
+        description: NotificDescrip.UPDATE_USER
+    }
+    yield put(commonActions.setNotificationData(notificationData))
+    yield put(commonActions.setIsShowNotification(true))
+}
+
+function* updateAvatarUserFetch({ payload }: PayloadAction<IUpdateAvatarUserPayload>): any {
     try {
         const { picture, userId } = payload
         let formData = new FormData()
@@ -36,17 +39,7 @@ function* updateUserAvatar({ payload }: PayloadAction<IUpdateAvatarUserPayload>)
 
         const response = yield call(() => UserService.updatePicture(userId, formData))
         const formattedResponse = yield response.json()
-
-        yield put(loginActions.setActiveUser(formattedResponse))
-        yield put(settingsActions.updateAvatarUserSuccess())
-
-        const notificationData = {
-            type: NotificType.SUCCESS,
-            message: NotificMes.SUCCESS,
-            description: NotificDescrip.UPDATE_USER_PHOTO
-        }
-        yield put(commonActions.setNotificationData(notificationData))
-        yield put(commonActions.setIsShowNotification(true))
+        yield put(settingsActions.updateAvatarUserSuccess(formattedResponse))
     } catch (e: any) {
         yield put(commonActions.setNotificationData(notificationError(e)))
         yield put(commonActions.setIsShowNotification(true))
@@ -54,9 +47,23 @@ function* updateUserAvatar({ payload }: PayloadAction<IUpdateAvatarUserPayload>)
     }
 }
 
+function* updateAvatarUserSuccess({ payload }: PayloadAction<IUser>): any {
+    yield put(loginActions.setActiveUser(payload))
+
+    const notificationData = {
+        type: NotificType.SUCCESS,
+        message: NotificMes.SUCCESS,
+        description: NotificDescrip.UPDATE_USER_PHOTO
+    }
+    yield put(commonActions.setNotificationData(notificationData))
+    yield put(commonActions.setIsShowNotification(true))
+}
+
 function* settingsSaga() {
-    yield takeLeading('settings/updateUserFetch', updateUser),
-        yield takeLeading('settings/updateAvatarUserFetch', updateUserAvatar)
+    yield takeLeading('settings/updateUserFetch', updateUserFetch),
+        yield takeLeading('settings/updateUserSuccess', updateUserSuccess),
+        yield takeLeading('settings/updateAvatarUserFetch', updateAvatarUserFetch)
+    yield takeLeading('settings/updateAvatarUserSuccess', updateAvatarUserSuccess)
 }
 
 export default settingsSaga
