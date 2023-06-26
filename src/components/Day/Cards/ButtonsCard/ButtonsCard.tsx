@@ -17,9 +17,9 @@ const ButtonsCard: FC<IProps> = ({ entry }) => {
     }
 
     const onEditEntry: () => void = () => {
-        setIsModalOpen(true)
         setUpdateEntry(entry)
         setIsNew(false)
+        setIsModalOpen(true)
     }
 
     return (

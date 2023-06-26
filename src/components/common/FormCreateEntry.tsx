@@ -4,13 +4,23 @@ import { ICreateEntry, IEntry } from '@/models/models'
 import { useActions } from '@/hooks/actions'
 import { useAppSelector } from '@/hooks/redux'
 import dayjs from 'dayjs'
+import { NotificDescrip, NotificMes, NotificType } from '@/common'
+import moment from 'moment'
 
 interface IProps {
     currentDay: Date | null
 }
 
 const FormCreateEntry: FC<IProps> = ({ currentDay }) => {
-    const { createEntryFetch, setIsFetching, updateEntryFetch, setIsNew, setUpdateEntry } = useActions()
+    const {
+        createEntryFetch,
+        setIsFetching,
+        updateEntryFetch,
+        setIsNew,
+        setUpdateEntry,
+        setNotificationData,
+        setIsShowNotification
+    } = useActions()
     const { activeUser } = useAppSelector(state => state.login)
     const { isNew, updateEntry } = useAppSelector(state => state.entries)
 
@@ -27,11 +37,24 @@ const FormCreateEntry: FC<IProps> = ({ currentDay }) => {
         form.resetFields()
     }, [updateEntry])
 
+    const notificationData = {
+        type: NotificType.INFO,
+        message: NotificMes.INFO,
+        description: NotificDescrip.UPDATE_USER_INFO
+    }
     const onFinish = (values: ICreateEntry) => {
-        isNew
-            ? createEntryFetch({ ...values, master: activeUser._id })
-            : updateEntryFetch({ ...values, master: activeUser._id, updateEntryId: updateEntry._id })
-        clearForm()
+        const isNotUpdate =
+            values.clientName === updateEntry.clientName &&
+            dayjs(values.date).format('DD/MM/YYYY') === dayjs(updateEntry.date).format('DD/MM/YYYY') &&
+            values.description === updateEntry.description &&
+            dayjs(values.time).toString() === dayjs(updateEntry.time).toString() &&
+            values.duration === updateEntry.duration
+
+        !isNotUpdate
+            ? isNew
+                ? createEntryFetch({ ...values, master: activeUser._id }) && clearForm()
+                : updateEntryFetch({ ...values, master: activeUser._id, updateEntryId: updateEntry._id }) && clearForm()
+            : setNotificationData(notificationData) && setIsShowNotification(true)
     }
 
     const { TextArea } = Input
