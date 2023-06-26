@@ -7,11 +7,12 @@ import React, { FC } from 'react'
 
 interface IProps {
     size: number
+    picture?: string
 }
 
-const TheAvatar: FC<IProps> = ({ size }) => {
+const TheAvatar: FC<IProps> = ({ size, picture }) => {
     const { activeUser } = useAppSelector(state => state.login)
-    const source = `${URL_SERVER}/${activeUser?.picture}`
+    const source = picture ? `${URL_SERVER}/${picture}` : `${URL_SERVER}/${activeUser?.picture}`
     return (
         <>
             {activeUser.picture ? (

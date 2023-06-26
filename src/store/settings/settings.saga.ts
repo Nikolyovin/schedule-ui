@@ -49,6 +49,7 @@ function* updateAvatarUserFetch({ payload }: PayloadAction<IUpdateAvatarUserPayl
 
 function* updateAvatarUserSuccess({ payload }: PayloadAction<IUser>): any {
     yield put(loginActions.setActiveUser(payload))
+    yield put(loginActions.getUsersFetch())
 
     const notificationData = {
         type: NotificType.SUCCESS,

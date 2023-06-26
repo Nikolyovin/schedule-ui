@@ -73,17 +73,17 @@ export const entriesSlice = createSlice({
             state.isNew = false
             state.isLoading = true
         },
-        updateEntrySuccess(state) {
+        updateEntrySuccess(state, action: PayloadAction<IUpdateEntry>) {
             state.isNew = true
             state.isLoading = false
             state.isModalOpen = false
             //изменения с помощью юзеэффетка и getEntriesFetch, поэтому стейт ек меняем
-            //     const { updateEntryId, clientName, date, description, duration, master, time } = action.payload
-            //     state.entries = state.entries.map(entry =>
-            //         entry._id === action.payload.updateEntryId
-            //             ? { ...entry, updateEntryId, clientName, date, description, duration, master, time }
-            //             : entry
-            //     )
+            // const { updateEntryId, clientName, date, description, duration, master, time } = action.payload
+            // state.entries = state.entries.map(entry =>
+            //     entry._id === action.payload.updateEntryId
+            //         ? { ...entry, updateEntryId, clientName, date, description, duration, master, time }
+            //         : entry
+            // )
         },
         setUpdateEntry(state, action: PayloadAction<IEntry>) {
             state.updateEntry = action.payload
