@@ -5,7 +5,8 @@ import { useActions } from '@/hooks/actions'
 import { useAppSelector } from '@/hooks/redux'
 import dayjs from 'dayjs'
 import { NotificDescrip, NotificMes, NotificType } from '@/common'
-import moment from 'moment'
+import 'dayjs/locale/ru'
+import locale from 'antd/lib/date-picker/locale/ru_RU.js'
 
 interface IProps {
     currentDay: Date | null
@@ -83,7 +84,7 @@ const FormCreateEntry: FC<IProps> = ({ currentDay }) => {
                 initialValue={currentDay ? dayjs(currentDay) : null}
                 rules={[{ required: true, message: 'Укажите дату сеанса!' }]}
             >
-                <DatePicker />
+                <DatePicker locale={locale} />
             </Form.Item>
             <Form.Item
                 label='Время сеанса'
@@ -91,7 +92,7 @@ const FormCreateEntry: FC<IProps> = ({ currentDay }) => {
                 rules={[{ required: true, message: 'Укажите время сеанса!' }]}
                 initialValue={!isNew ? dayjs(updateEntry.time) : null}
             >
-                <TimePicker />
+                <TimePicker locale={locale} />
             </Form.Item>
 
             <Form.Item
