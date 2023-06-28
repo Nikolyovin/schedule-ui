@@ -18,26 +18,7 @@ const TheCard: FC<IProps> = ({ entry, master }) => {
         <Card
             headStyle={{ backgroundColor: master.color, border: 0 }}
             className='w-[800px] mt-3 '
-            cover={
-                <HeaderCard master={master} />
-                // <Card.Meta
-                //     className=''
-                //     avatar={<Avatar src={master.picture} />}
-                //     title={master.name}
-                //     style={{
-                //         backgroundColor: master.color,
-                //         height: 56,
-                //         paddingLeft: 15,
-                //         display: 'flex',
-                //         alignItems: 'center',
-                //         borderRadius: 10,
-                //         borderBottomLeftRadius: 0,
-                //         borderBottomRightRadius: 0
-                //         // border: 0
-                //     }}
-                //     // description='This is the description'
-                // />
-            }
+            cover={<HeaderCard master={master} />}
         >
             <div className='flex mb-1'>
                 <p className='text-lg '>

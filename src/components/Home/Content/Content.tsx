@@ -23,10 +23,10 @@ const Content = () => {
     // min-h-[calc(100vh-64px)]
     return (
         // <Layout.Content style={{ padding: '0 100px', minHeight: calcHeight }}>
-        <div className='px-[100px] pt-3 min-h-[calc(100vh-var(--header-height))]'>
+        <div className='2xl:px-[100px] xl:px-[40px] md:px-[10px] px-0  md:pt-3 min-h-[calc(100vh-var(--header-height))]'>
             <NotificationApp />
             <CalendarAll />
-            <div className='my-5 text-center absolute bottom-3 z-10 left-[50%] -translate-x-1/2'>
+            <div className='text-center absolute bottom-3 z-10 left-[50%] -translate-x-1/2 '>
                 <Button type='primary' onClick={showModal}>
                     Создать
                 </Button>

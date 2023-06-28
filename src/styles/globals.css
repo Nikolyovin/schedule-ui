@@ -91,19 +91,35 @@ select {
   /* border-bottom: 3px solid rgb(241 245 249); */
 }
 
-/* class="ant-picker-cell ant-picker-cell-in-view" */
-
-/* 'ant-picker-cell-inner ant-picker-calendar-date' */
-/* ant-picker-calendar-date-content */
-/* .ant-picker-calendar-date-content{
-  display: block;
-  box-sizing: border-box;
-  height: 350px;
-  background-color: aqua;
-} */
-
 .ant-picker-calendar.ant-picker-calendar-full .ant-picker-calendar-date-content {
   height: 100px;
 }
+
+@media (max-width: 1280px) {
+  .ant-picker-calendar.ant-picker-calendar-full .ant-picker-calendar-date-content {
+    max-height: 65px;
+  }
+}
+
+@media (max-width: 641px) {
+  .ant-picker-calendar-header{
+    margin: 2px 2px;
+
+  }
+  .ant-picker-calendar.ant-picker-calendar-full .ant-picker-calendar-date-content {
+    max-height: 70px;
+    /* max-width: 55px; */
+    /* margin-right: 5px; */
+
+  }
+}
+
+/*for iphone 12 mini*/
+@media (max-height: 668px) {
+  .ant-picker-calendar.ant-picker-calendar-full .ant-picker-calendar-date-content {
+    max-height: 54px;
+  }
+}
+
 
 
