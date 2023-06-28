@@ -25,7 +25,7 @@ const Cards: FC<IProps> = ({ entries, users }) => {
                 .sort((a, b) => moment(a.time).format('HH:mm').localeCompare(moment(b.time).format('HH:mm')))
                 .map(entry => {
                     const dateEntry = new Date(entry.date).setHours(0, 0, 0, 0) //setHours(0,0,0,0) для того чтобы сравнить две даты без времени
-                    const dateCell = new Date(router.query.id).setHours(0, 0, 0, 0) //+date нужен чтобы успокоить ts
+                    const dateCell = router.query.id && new Date(+router.query.id).setHours(0, 0, 0, 0) //+date и  router.query.id &&  нужен чтобы успокоить ts
 
                     const master: IUser = users.find(user => entry.master === user._id) || ({} as IUser)
 
