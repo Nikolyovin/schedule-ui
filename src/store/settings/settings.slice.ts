@@ -19,7 +19,7 @@ export const settingsSlice = createSlice({
         updateUserSuccess(state) {
             state.isLoading = false
         },
-        updateAvatarUserFetch(state) {
+        updateAvatarUserFetch(state, action: PayloadAction<IUpdateAvatarUserPayload>) {
             state.isLoading = true
         },
         updateAvatarUserSuccess(state) {

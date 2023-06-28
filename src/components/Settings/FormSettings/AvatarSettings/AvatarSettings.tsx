@@ -17,6 +17,7 @@ const AvatarSettings: FC<IProps> = ({ activeUserId }) => {
     }
 
     const handleUpload = (e: any) => {
+        // const file: File = e.target.files[0]
         // React.FormEvent<HTMLInputElement> не успокоил ts  пришлось any
         updateAvatarUserFetch({ userId: activeUserId, picture: e.target.files[0] })
     }
