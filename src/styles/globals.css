@@ -108,18 +108,24 @@ select {
   }
   .ant-picker-calendar.ant-picker-calendar-full .ant-picker-calendar-date-content {
     max-height: 70px;
-    /* max-width: 55px; */
-    /* margin-right: 5px; */
-
   }
+
+  .ant-form-item {
+    margin-bottom: 8px;
+  }
+
+  .ant-layout-header {
+    padding-inline: 25px
+  }
+  
+
 }
 
-/*for iphone 12 mini*/
+/*for iphone 12 mini!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
 @media (max-height: 668px) {
   .ant-picker-calendar.ant-picker-calendar-full .ant-picker-calendar-date-content {
     max-height: 54px;
-  }
+  } 
+  
 }
-
-
-
+/*/////////////////////////////////////////////////////////////////////*/

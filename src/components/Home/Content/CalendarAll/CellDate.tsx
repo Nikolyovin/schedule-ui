@@ -15,7 +15,10 @@ const CellDate: FC<IProps> = ({ masterName, color, duration, id }) => {
 
     return (
         <div className='flex items-center flex-nowrap justify-start '>
-            <div style={{ backgroundColor: color }} className='rounded-full lg:w-3 lg:h-3 w-2 h-2 md:mr-2 mr-1'></div>
+            <div
+                style={{ backgroundColor: color }}
+                className='rounded-full lg:w-3 lg:h-3 w-2 h-2 md:mr-2 mr-[1px]'
+            ></div>
 
             {xlScreen && (
                 <span>

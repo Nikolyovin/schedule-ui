@@ -36,7 +36,7 @@ const Cards: FC<IProps> = ({ entries, users }) => {
                 })}
             {!countCards && (
                 // <div className=' h-[100vh] flex justify-center items-center'>
-                <p className='text-xl pt-[300px]'>Этот день полностью свободен!</p>
+                <p className='text-xl md:pt-[300px] pt-[200px]'>Этот день полностью свободен!</p>
                 // </div>
             )}
         </>

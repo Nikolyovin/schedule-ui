@@ -17,23 +17,23 @@ const TheCard: FC<IProps> = ({ entry, master }) => {
     return (
         <Card
             headStyle={{ backgroundColor: master.color, border: 0 }}
-            className='w-[800px] mt-3 '
+            className='md:w-[800px] w-[300px] mt-3'
             cover={<HeaderCard master={master} />}
         >
-            <div className='flex mb-1'>
-                <p className='text-lg '>
+            <div className='md:flex 2xl:mb-1'>
+                <p className='text-lg text-sm'>
                     Начало сеанса:
-                    <span className='text-2xl font-medium'> {moment(entry.time).format('HH:mm')}; </span>
+                    <span className='2xl:text-2xl text-sm font-medium'> {moment(entry.time).format('HH:mm')}; </span>
                 </p>
-                <p className='text-lg ml-2'>
-                    Продолжительность: <span className='text-2xl font-medium'>{entry.duration} ч.</span>
+                <p className='text-lg md:ml-2 text-sm'>
+                    Продолжительность: <span className='2xl:text-2xl font-medium'>{entry.duration} ч.</span>
                 </p>
             </div>
-            <p className='text-lg mb-1'>
-                Имя клиента: <span className='font-medium text-xl'>{entry.clientName}</span>
+            <p className='text-lg 2xl:mb-1 text-sm'>
+                Имя клиента: <span className='font-medium 2xl:text-xl text-sm'>{entry.clientName}</span>
             </p>
-            <p className='text-lg mb-1'>
-                Описание: <span className='font-medium text-xl '>{entry.description}</span>
+            <p className='text-lg 2xl:mb-1 text-sm'>
+                Описание: <span className='font-medium 2xl:text-xl text-sm'>{entry.description}</span>
             </p>
             {entry.master === activeUser._id ? <ButtonsCard entry={entry} /> : <></>}
         </Card>
