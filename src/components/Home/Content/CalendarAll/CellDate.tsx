@@ -16,8 +16,6 @@ const CellDate: FC<IProps> = ({ masterName, color, duration, id }) => {
     const lgScreen = 1025 < width && width <= 1281
     const xlScreen = width > 1281
 
-    console.log('width', width)
-
     return (
         <div className='flex items-center flex-nowrap justify-start '>
             <div

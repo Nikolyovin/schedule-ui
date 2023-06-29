@@ -5,6 +5,7 @@ import { IEntry, IUser } from '@/models/models'
 import moment from 'moment'
 import { useAppSelector } from '@/hooks/redux'
 import HeaderCard from './HeaderCard/HeaderCard'
+import dynamic from 'next/dynamic'
 // import Meta from 'antd/es/card/Meta'
 
 interface IProps {
@@ -40,4 +41,6 @@ const TheCard: FC<IProps> = ({ entry, master }) => {
     )
 }
 
-export default TheCard
+// export default TheCard
+
+export default dynamic(() => Promise.resolve(TheCard), { ssr: false })

@@ -13,8 +13,6 @@ const NotificationApp: FC = () => {
 
     const { description, message, type } = notificationData
 
-    console.log()
-
     useEffect(() => {
         if (isShowNotification) {
             openNotificationWithIcon()

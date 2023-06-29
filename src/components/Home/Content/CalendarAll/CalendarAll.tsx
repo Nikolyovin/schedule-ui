@@ -10,6 +10,7 @@ import { useRouter } from 'next/router'
 import moment from 'moment'
 import 'dayjs/locale/ru'
 import locale from 'antd/lib/calendar/locale/ru_RU.js'
+import dynamic from 'next/dynamic'
 
 const CalendarAll = () => {
     const { getEntriesFetch, setIsFetching, setCurrentDay } = useActions()
@@ -81,4 +82,7 @@ const CalendarAll = () => {
     )
 }
 
-export default CalendarAll
+// export default CalendarAll
+
+export default dynamic(() => Promise.resolve(CalendarAll), { ssr: false })
+// export default Header
