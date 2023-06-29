@@ -1,15 +1,16 @@
 import Header from '@/components/common/Header'
-import RegistrationForm from '@/components/Registration/RegistrationForm/RegistrationForm'
 import { useAppSelector } from '@/hooks/redux'
-import { Button, Card, Dropdown, Form, Input, Row, Select, Spin } from 'antd'
+import { Card } from 'antd'
 import { useRouter } from 'next/router'
-import React, { MutableRefObject, useEffect, useRef } from 'react'
+import React, { useEffect } from 'react'
 import FormSettings from './FormSettings/FormSettings'
 import AvatarSettings from './FormSettings/AvatarSettings/AvatarSettings'
+import { useWindowSize } from '@/hooks/windowSize'
 
 const Settings = () => {
     const { activeUser } = useAppSelector(state => state.login)
     const router = useRouter()
+    const { width } = useWindowSize()
 
     useEffect(() => {
         if (Object.keys(activeUser).length === 0) {
@@ -19,11 +20,21 @@ const Settings = () => {
         }
     }, [activeUser])
 
+    const lgScreen = 641 < width && width <= 1281
+    const xlScreen = width > 1281
+    const smScreen = width < 641
+
+    const styleCard = () => {
+        if (lgScreen) return { width: 500, maxHeight: 650 }
+        if (xlScreen) return { width: 700, maxHeight: 750 }
+        if (smScreen) return { width: 300, maxHeight: 560 }
+    }
+
     return (
         <>
             <Header />
-            <div className='min-h-[calc(100vh-var(--header-height))] w-[100%] flex justify-center  bg-slate-50'>
-                <Card title='Мои настройки' style={{ width: 700, maxHeight: 750, marginTop: 50 }}>
+            <div className='min-h-[calc(100vh-var(--header-height))] w-[100%] flex justify-center items-center  bg-slate-50'>
+                <Card title='Мои настройки' style={styleCard()}>
                     <AvatarSettings activeUserId={activeUser._id} />
                     <FormSettings activeUser={activeUser} />
                 </Card>

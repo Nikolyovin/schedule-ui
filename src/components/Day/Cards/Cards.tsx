@@ -1,11 +1,9 @@
 import Loading from '@/components/common/Loader'
 import { IEntry, IUser } from '@/models/models'
-import { Card } from 'antd'
 import moment from 'moment'
 import 'moment/locale/ru'
 import { useRouter } from 'next/router'
-import React, { FC, useEffect } from 'react'
-import ButtonsCard from './ButtonsCard/ButtonsCard'
+import React, { FC } from 'react'
 import TheCard from './TheCard/TheCard'
 
 interface IProps {
@@ -25,7 +23,7 @@ const Cards: FC<IProps> = ({ entries, users }) => {
                 .sort((a, b) => moment(a.time).format('HH:mm').localeCompare(moment(b.time).format('HH:mm')))
                 .map(entry => {
                     const dateEntry = new Date(entry.date).setHours(0, 0, 0, 0) //setHours(0,0,0,0) для того чтобы сравнить две даты без времени
-                    const dateCell = router.query.id && new Date(+router.query.id).setHours(0, 0, 0, 0) //+date и  router.query.id &&  нужен чтобы успокоить ts
+                    const dateCell = router.query.id && new Date(router.query.id as string).setHours(0, 0, 0, 0) //+date, as string и  router.query.id &&  нужен чтобы успокоить ts
 
                     const master: IUser = users.find(user => entry.master === user._id) || ({} as IUser)
 
