@@ -1,4 +1,5 @@
-import React, { FC } from 'react'
+import { useWindowSize } from '@/hooks/windowSize'
+import React, { FC, useEffect, useState } from 'react'
 
 interface IProps {
     masterName: string
@@ -8,10 +9,14 @@ interface IProps {
 }
 
 const CellDate: FC<IProps> = ({ masterName, color, duration, id }) => {
-    const xlScreen = window.innerWidth > 1281
-    const lgScreen = 1025 < window.innerWidth && window.innerWidth <= 1281
-    const mdScreen = 641 < window.innerWidth && window.innerWidth <= 1025
-    const smScreen = window.innerWidth <= 641
+    const { width } = useWindowSize()
+
+    const smScreen = width <= 641
+    const mdScreen = 641 < width && width <= 1025
+    const lgScreen = 1025 < width && width <= 1281
+    const xlScreen = width > 1281
+
+    console.log('width', width)
 
     return (
         <div className='flex items-center flex-nowrap justify-start '>

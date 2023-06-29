@@ -21,6 +21,9 @@ const AvatarSettings: FC<IProps> = ({ activeUserId }) => {
         // React.FormEvent<HTMLInputElement> не успокоил ts  пришлось any
         updateAvatarUserFetch({ userId: activeUserId, picture: e.target.files[0] })
     }
+
+    // const lgScreen = window.innerWidth <= 1281
+
     return (
         <>
             <div className='flex justify-center mb-5 items-end'>

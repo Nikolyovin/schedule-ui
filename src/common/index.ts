@@ -71,5 +71,3 @@ export const notificationError = (e: any) => {
         description: `${e.name}: ${e.message}`
     }
 }
-
-// export const HEADER_HEIGHT = 64
