@@ -73,7 +73,7 @@ export const entriesSlice = createSlice({
             state.isNew = false
             state.isLoading = true
         },
-        updateEntrySuccess(state, action: PayloadAction<IUpdateEntry>) {
+        updateEntrySuccess(state) {
             state.isNew = true
             state.isLoading = false
             state.isModalOpen = false

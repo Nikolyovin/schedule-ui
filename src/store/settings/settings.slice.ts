@@ -13,7 +13,7 @@ export const settingsSlice = createSlice({
     name: 'settings',
     initialState,
     reducers: {
-        updateUserFetch(state) {
+        updateUserFetch(state, action: PayloadAction<IUpdateUserPayload>) {
             state.isLoading = true
         },
         updateUserSuccess(state) {
