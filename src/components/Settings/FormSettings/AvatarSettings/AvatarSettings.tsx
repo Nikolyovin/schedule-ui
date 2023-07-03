@@ -1,5 +1,6 @@
 import TheAvatar from '@/components/common/TheAvatar'
 import { useActions } from '@/hooks/actions'
+import { useAppSelector } from '@/hooks/redux'
 import { useWindowSize } from '@/hooks/windowSize'
 import { EditOutlined } from '@ant-design/icons'
 import { Button } from 'antd'
@@ -10,6 +11,7 @@ interface IProps {
 }
 
 const AvatarSettings: FC<IProps> = ({ activeUserId }) => {
+    const {activeUser} = useAppSelector(state => state.login)
     const { updateAvatarUserFetch } = useActions()
     const filePicker = useRef<HTMLInputElement>(null) as MutableRefObject<HTMLInputElement>
     const { width } = useWindowSize()
@@ -25,12 +27,10 @@ const AvatarSettings: FC<IProps> = ({ activeUserId }) => {
         updateAvatarUserFetch({ userId: activeUserId, picture: e.target.files[0] })
     }
 
-    // const lgScreen = window.innerWidth <= 1281
-
     return (
         <>
             <div className='flex justify-center 2xl:mb-5 items-end'>
-                <TheAvatar size={lgMinScreen ? 100 : 200} />
+                <TheAvatar size={lgMinScreen ? 100 : 200} picture={activeUser.picture}/>
                 <Button type='primary' onClick={handlePick} shape='circle' icon={<EditOutlined />} />
             </div>
             <input

@@ -51,7 +51,7 @@ const Header: FC = () => {
                 </div>
                 <Dropdown arrow trigger={['click']} menu={{ items }}>
                     <div>
-                        <TheAvatar size={40} />
+                        <TheAvatar size={40} picture={activeUser.picture} />
                     </div>
                 </Dropdown>
             </div>
