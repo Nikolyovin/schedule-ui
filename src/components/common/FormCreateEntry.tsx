@@ -101,7 +101,7 @@ const FormCreateEntry: FC<IProps> = ({ currentDay }) => {
                 initialValue={updateEntry.duration}
                 rules={[{ required: true, message: 'Укажите продолжительность часов!' }]}
             >
-                <InputNumber placeholder='в часах' min={1} max={12} controls keyboard/>
+                <InputNumber type='number' placeholder='в часах' min={1} max={12} controls keyboard/>
             </Form.Item>
 
             <Form.Item
