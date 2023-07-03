@@ -84,7 +84,7 @@ const FormCreateEntry: FC<IProps> = ({ currentDay }) => {
                 initialValue={currentDay ? dayjs(currentDay) : null}
                 rules={[{ required: true, message: 'Укажите дату сеанса!' }]}
             >
-                <DatePicker locale={locale} />
+                <DatePicker locale={locale} inputReadOnly/>
             </Form.Item>
             <Form.Item
                 label='Время сеанса'
@@ -92,7 +92,7 @@ const FormCreateEntry: FC<IProps> = ({ currentDay }) => {
                 rules={[{ required: true, message: 'Укажите время сеанса!' }]}
                 initialValue={!isNew ? dayjs(updateEntry.time) : null}
             >
-                <TimePicker locale={locale} />
+                <TimePicker locale={locale} format={'HH:mm'} changeOnBlur inputReadOnly/>
             </Form.Item>
 
             <Form.Item
@@ -101,7 +101,7 @@ const FormCreateEntry: FC<IProps> = ({ currentDay }) => {
                 initialValue={updateEntry.duration}
                 rules={[{ required: true, message: 'Укажите продолжительность часов!' }]}
             >
-                <InputNumber placeholder='в часах' min={1} max={12} />
+                <InputNumber placeholder='в часах' min={1} max={12} controls keyboard/>
             </Form.Item>
 
             <Form.Item

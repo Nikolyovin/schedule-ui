@@ -12,13 +12,7 @@ interface IProps {
 
 const TheAvatar: FC<IProps> = ({ size, picture }) => {
     const { activeUser } = useAppSelector(state => state.login)
-    // const source = picture ? `${URL_SERVER}/${picture}` : `${URL_SERVER}/${activeUser?.picture}`
     const source = `${URL_SERVER}/${picture}`
-    console.log('picture', picture);
-    
-    // const source = switch(picture) {
-    //     case 'undefined'
-    // }
 
     return (
         <>
