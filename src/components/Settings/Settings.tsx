@@ -6,6 +6,7 @@ import React, { useEffect } from 'react'
 import FormSettings from './FormSettings/FormSettings'
 import AvatarSettings from './FormSettings/AvatarSettings/AvatarSettings'
 import { useWindowSize } from '@/hooks/windowSize'
+import dynamic from 'next/dynamic'
 
 const Settings = () => {
     const { activeUser } = useAppSelector(state => state.login)
@@ -23,6 +24,9 @@ const Settings = () => {
     const lgScreen = 641 < width && width <= 1281
     const xlScreen = width > 1281
     const smScreen = width < 641
+
+    console.log(lgScreen, xlScreen, smScreen);
+    
 
     const styleCard = () => {
         if (lgScreen) return { width: 500, maxHeight: 650 }
@@ -43,4 +47,5 @@ const Settings = () => {
     )
 }
 
-export default Settings
+// export default Settings
+export default dynamic(() => Promise.resolve(Settings), { ssr: false })

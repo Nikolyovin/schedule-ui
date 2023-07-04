@@ -1,6 +1,6 @@
-// export const URL_SERVER = 'http://95.83.149.6:5100/'
+export const URL_SERVER = 'http://95.83.149.6:5100/'
 
-export const URL_SERVER = 'http://localhost:5100/'
+// export const URL_SERVER = 'http://localhost:5100/'
 
 export const DEFAULT_COLOR = '#1677FF'
 
