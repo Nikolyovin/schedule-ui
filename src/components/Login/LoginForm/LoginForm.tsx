@@ -22,7 +22,7 @@ const LoginForm: FC = () => {
 
     const onFinish = (values: ILoginForm) => {
         if (!isLoading && users.length > 0) {
-            const login = users.find(user => user.login === values.username && user.password === values.password)
+            const login = users.find(user => user.login.toLowerCase() === values.username.toLowerCase() && user.password === values.password)
             if (!login) setError(true)
             if (login) {
                 setIsLoadingLogin(true)

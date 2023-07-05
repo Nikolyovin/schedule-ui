@@ -4,6 +4,7 @@ import NotificationApp from '@/components/common/NotificationApp'
 import { useActions } from '@/hooks/actions'
 import { useAppSelector } from '@/hooks/redux'
 import { IRegistrationForm } from '@/models/models'
+import login from '@/pages/login'
 import { LockOutlined, UploadOutlined, UserOutlined } from '@ant-design/icons'
 import { Button, Form, Input, Row, Select, Spin, ColorPicker } from 'antd'
 import { Color } from 'antd/es/color-picker'
@@ -38,8 +39,9 @@ const RegistrationForm: FC = () => {
         console.log(values)
 
         const colorHex = typeof values.color === 'string' ? values.color : values.color.toHexString()
+        const loginLow = values.login.toLocaleLowerCase()
         // console.log(colorHex)
-        createUserFetch({ ...values, color: colorHex, picture: img })
+        createUserFetch({ ...values, login: loginLow, color: colorHex, picture: img })
     }
 
     const onChangeInputLogin = (e: ChangeEvent<HTMLInputElement>) => {

@@ -29,6 +29,7 @@ const FormSettings: FC<IProps> = ({ activeUser }) => {
 
     const onFinish: (values: IUpdateUser) => void = values => {
         const colorHex = typeof values.color === 'string' ? values.color : values.color.toHexString()
+        const loginLow = values.login.toLocaleLowerCase()
 
         const isNotUpdate =
             values.name === activeUser.name &&
@@ -38,7 +39,7 @@ const FormSettings: FC<IProps> = ({ activeUser }) => {
 
         isNotUpdate
             ? setNotificationData(notificationData) && setIsShowNotification(true)
-            : updateUserFetch({ ...values, color: colorHex, userId: activeUser._id })
+            : updateUserFetch({ ...values, color: colorHex, login: loginLow, userId: activeUser._id })
     }
 
     return (
