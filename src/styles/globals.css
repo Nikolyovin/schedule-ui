@@ -60,7 +60,7 @@ img {
 }
 
 /* Указываем понятную периодичность в потоке данных у article*/
-article > * + * {
+article>*+* {
   margin-top: 1em;
 }
 
@@ -71,6 +71,7 @@ textarea,
 select {
   font: inherit;
 }
+
 /*///////////////////ПЕРЕМЕННЫЕ ДЛЯ TAILWIND///////////////*/
 
 :root {
@@ -80,7 +81,7 @@ select {
 
 /*/////////////////*/
 
-.ant-picker-calendar-mode-switch{
+.ant-picker-calendar-mode-switch {
   display: none;
 }
 
@@ -102,10 +103,11 @@ select {
 }
 
 @media (max-width: 641px) {
-  .ant-picker-calendar-header{
+  .ant-picker-calendar-header {
     margin: 2px 2px;
 
   }
+
   .ant-picker-calendar.ant-picker-calendar-full .ant-picker-calendar-date-content {
     max-height: 70px;
   }
@@ -117,7 +119,14 @@ select {
   .ant-layout-header {
     padding-inline: 25px
   }
-  
+
+  .mobile-background {
+    background-image: url("../../public/images/background2.jpg");
+    background-position: center;
+    background-blend-mode: screen;
+    background-size: cover;
+
+  }
 
 }
 
@@ -125,7 +134,16 @@ select {
 @media (max-height: 668px) {
   .ant-picker-calendar.ant-picker-calendar-full .ant-picker-calendar-date-content {
     max-height: 54px;
-  } 
-  
+  }
+
 }
+
 /*/////////////////////////////////////////////////////////////////////*/
+
+/* .mobile-background {
+  background-image: url("../../public/images/background2.jpg");
+  background-position: center;
+  background-blend-mode: screen;
+  background-size: cover;
+  
+} */

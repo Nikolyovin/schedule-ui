@@ -7,7 +7,7 @@ import NotificationApp from '../common/NotificationApp'
 const Login: FC = () => {
     const { isLoading } = useAppSelector(state => state.login)
     return (
-        <div className=' h-[100vh] w-[100%] flex justify-center  items-center  bg-slate-50'>
+        <div className='mobile-background h-[100vh] w-[100%] flex justify-center  items-center md:bg-slate-50'>
             {/* <NotificationApp /> */}
             <Card title={'Вход'}>
                 <LoginForm />

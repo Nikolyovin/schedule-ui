@@ -37,7 +37,7 @@ const Settings = () => {
     return (
         <>
             <Header />
-            <div className='min-h-[calc(100vh-var(--header-height))] w-[100%] flex justify-center items-center  bg-slate-50'>
+            <div className='mobile-background min-h-[calc(100vh-var(--header-height))] w-[100%] flex justify-center items-center  md:bg-slate-50'>
                 <Card title='Мои настройки' style={styleCard()}>
                     <AvatarSettings activeUserId={activeUser._id} />
                     <FormSettings activeUser={activeUser} />

@@ -10,6 +10,7 @@ import moment from 'moment'
 import dynamic from 'next/dynamic'
 import { IEntry } from '@/models/models'
 import NotificationApp from '../common/NotificationApp'
+// import background from '../../../public/images/background.jpg'
 
 const Day: FC = () => {
     const { entries, currentDay, isFetching, isModalOpen } = useAppSelector(state => state.entries)
@@ -42,9 +43,9 @@ const Day: FC = () => {
     return (
         <>
             <Header />
-            <div className='bg-slate-50 min-h-[calc(100vh-64px)]'>
+            <div  className='mobile-background bg-[url("/public/images/background.jpg")]  min-h-[calc(100vh-64px)]'>
                 <NotificationApp />
-                <p className='capitalize text-center pt-5 text-2xl '>{formattedDate}</p>
+                <p className='capitalize text-center pt-5 text-2xl'>{formattedDate}</p>
                 <div className=' flex flex-col justify-center items-center p-5'>
                     <Cards entries={entries} users={users} />
                     <Button className='mt-5' type='primary' onClick={onOpenModal}>
