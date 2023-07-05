@@ -1,4 +1,3 @@
-import Loading from '@/components/common/Loader'
 import { IEntry, IUser } from '@/models/models'
 import moment from 'moment'
 import 'moment/locale/ru'

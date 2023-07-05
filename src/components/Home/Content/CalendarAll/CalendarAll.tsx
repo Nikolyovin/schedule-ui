@@ -1,4 +1,3 @@
-import Loading from '@/components/common/Loader'
 import { useActions } from '@/hooks/actions'
 import { useAppSelector } from '@/hooks/redux'
 import { Calendar, Col, Row, Spin } from 'antd'
