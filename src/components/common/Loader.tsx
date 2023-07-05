@@ -1,9 +1,10 @@
 import { Spin } from 'antd'
+import { FC } from 'react'
 
-const Loading = () => {
+const Loading:FC = ({child}) => {
   return (
-    <div className='m-auto'>
-      <Spin size='large' tip='Loading...' />
+    <div className='min-h-[calc(100vh-var(--header-height))] flex justify-center items-center'>
+      <Spin size='large' tip='Loading...' >{child}</Spin>
     </div>
   )
 }

@@ -1,6 +1,6 @@
 import Header from '@/components/common/Header'
 import { useAppSelector } from '@/hooks/redux'
-import { Button, Modal } from 'antd'
+import { Button, Modal, Spin } from 'antd'
 import { useRouter } from 'next/router'
 import React, { FC, useEffect } from 'react'
 import Cards from './Cards/Cards'
@@ -43,11 +43,14 @@ const Day: FC = () => {
     return (
         <>
             <Header />
-            <div  className='mobile-background bg-[url("/public/images/background.jpg")]  min-h-[calc(100vh-64px)]'>
+            <div className='mobile-background  min-h-[calc(100vh-64px)]'>
                 <NotificationApp />
                 <p className='capitalize text-center pt-5 text-2xl'>{formattedDate}</p>
                 <div className=' flex flex-col justify-center items-center p-5'>
-                    <Cards entries={entries} users={users} />
+                    <Spin spinning={Object.keys(entries).length == 0} size='large' tip='Загрузка...'>
+                        <Cards entries={entries} users={users} />
+                    </Spin>
+
                     <Button className='mt-5' type='primary' onClick={onOpenModal}>
                         Добавить
                     </Button>

@@ -96,12 +96,24 @@ select {
   height: 100px;
 }
 
-@media (max-width: 1280px) {
+.ant-picker-calendar-date-value {
+  height: 15px;
+}
+
+@media (max-width: 1366px) {
   .ant-picker-calendar.ant-picker-calendar-full .ant-picker-calendar-date-content {
-    max-height: 65px;
+    max-height: 68px;
   }
 }
 
+@media (max-width: 1280px) {
+  .ant-picker-calendar.ant-picker-calendar-full .ant-picker-calendar-date-content {
+    max-height: 74px;
+  }
+}
+
+
+/*////////////////////////////////////////// FOR MOBILE////////////////////////////////////////////*/
 @media (max-width: 641px) {
   .ant-picker-calendar-header {
     margin: 2px 2px;
@@ -109,7 +121,9 @@ select {
   }
 
   .ant-picker-calendar.ant-picker-calendar-full .ant-picker-calendar-date-content {
-    max-height: 70px;
+    max-height: 80px;
+    /* position: absolute; */
+    /* margin-top: -15px; */
   }
 
   .ant-form-item {
@@ -130,10 +144,10 @@ select {
 
 }
 
-/*for iphone 12 mini!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
+/*//////////////////////////////////////////////////////////////for iphone 12 mini!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
 @media (max-height: 668px) {
   .ant-picker-calendar.ant-picker-calendar-full .ant-picker-calendar-date-content {
-    max-height: 54px;
+    max-height: 63px;
   }
 
 }

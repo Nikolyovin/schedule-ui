@@ -21,8 +21,8 @@ const Settings = () => {
         }
     }, [activeUser])
 
-    const lgScreen = 641 < width && width <= 1281
-    const xlScreen = width > 1281
+    const lgScreen = 641 < width && width <= 1366
+    const xlScreen = width > 1366
     const smScreen = width < 641
 
     console.log(lgScreen, xlScreen, smScreen);

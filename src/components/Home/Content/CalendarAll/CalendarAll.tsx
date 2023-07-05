@@ -1,7 +1,7 @@
 import Loading from '@/components/common/Loader'
 import { useActions } from '@/hooks/actions'
 import { useAppSelector } from '@/hooks/redux'
-import { Calendar, Spin } from 'antd'
+import { Calendar, Col, Row, Spin } from 'antd'
 import React, { useEffect, useState } from 'react'
 import type { Dayjs } from 'dayjs'
 import CellDate from './CellDate'
@@ -41,25 +41,30 @@ const CalendarAll = () => {
     }
 
     //ячейки для календаря
-    const dateCellRender: (date: Dayjs) => JSX.Element[] = date => {
-        return entries.map(entry => {
-            const dateEntry = new Date(entry.date).setHours(0, 0, 0, 0) //setHours(0,0,0,0) для того чтобы сравнить две даты без времени
-            const dateCell = new Date(+date).setHours(0, 0, 0, 0) //+date нужен чтобы успокоить ts
 
-            const master: IUser = users.find(user => user._id === entry.master) || ({} as IUser)
+    const dateCellRender: (date: Dayjs) => JSX.Element[] | null = date => {
+        if (Object.keys(entries).length !== 0) {
+            return entries.map(entry => {
+                const dateEntry = new Date(entry.date).setHours(0, 0, 0, 0) //setHours(0,0,0,0) для того чтобы сравнить две даты без времени
+                const dateCell = new Date(+date).setHours(0, 0, 0, 0) //+date нужен чтобы успокоить ts
 
-            return dateCell === dateEntry && master ? (
-                <CellDate
-                    key={entry._id}
-                    id={entry._id}
-                    color={master.color}
-                    masterName={master.name}
-                    duration={entry.duration}
-                />
-            ) : (
-                <div key={entry._id}></div>
-            )
-        })
+                const master: IUser = users.find(user => user._id === entry.master) || ({} as IUser)
+
+                return dateCell === dateEntry && master ? (
+                    <CellDate
+                        key={entry._id}
+                        id={entry._id}
+                        color={master.color}
+                        masterName={master.name}
+                        duration={entry.duration}
+                    />
+                ) : (
+                    <div key={entry._id}></div>
+                )
+            })
+        } else {
+            return null
+        }
     }
 
     useEffect(() => {
@@ -67,18 +72,22 @@ const CalendarAll = () => {
         setIsFetching(false)
     }, [isFetching])
 
-    if (Object.keys(entries).length == 0) return <Loading />
+    // if (Object.keys(entries).length == 0) return <Loading />
 
     return (
-        <Calendar
-            // className='min-h-[calc(100vh-150px)]'
-            // fullscreen={false}
-            // style={{ height: 300 }}
-            onPanelChange={(date: Dayjs) => onPanelChange(date)}
-            locale={locale}
-            onSelect={(date: Dayjs) => onSelect(date)}
-            cellRender={(date: Dayjs) => dateCellRender(date)}
-        />
+        // <div className='flex h-[100vh] items-center '>
+        <Spin spinning={Object.keys(entries).length == 0} size='large' tip='Загрузка...'>
+            <Calendar
+                // className='min-h-[100vh]'
+                // fullscreen={false}
+                // style={{ height: 300 }}
+                onPanelChange={(date: Dayjs) => onPanelChange(date)}
+                locale={locale}
+                onSelect={(date: Dayjs) => onSelect(date)}
+                cellRender={(date: Dayjs) => dateCellRender(date)}
+            />
+        </Spin>
+        // </div>
     )
 }
 

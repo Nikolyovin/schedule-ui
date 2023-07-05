@@ -16,7 +16,7 @@ const AvatarSettings: FC<IProps> = ({ activeUserId }) => {
     const filePicker = useRef<HTMLInputElement>(null) as MutableRefObject<HTMLInputElement>
     const { width } = useWindowSize()
 
-    const lgMinScreen = width <= 1281
+    const lgMinScreen = width <= 1366
 
     const handlePick = () => {
         filePicker.current.click()
