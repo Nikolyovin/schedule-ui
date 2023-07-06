@@ -3,6 +3,8 @@ import { IEntry } from '@/models/models'
 import { CloseOutlined, EditOutlined } from '@ant-design/icons'
 import { Button, Popconfirm } from 'antd'
 import React, { FC } from 'react'
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { faInstagram, faVk, faTelegram } from '@fortawesome/free-brands-svg-icons'
 
 interface IProps {
     entry: IEntry
@@ -24,6 +26,7 @@ const ButtonsCard: FC<IProps> = ({ entry }) => {
 
     return (
         <div className='absolute top-3 right-3'>
+            {/* <FontAwesomeIcon icon={faTelegram} size='xl' /> */}
             <Button onClick={onEditEntry} size='small' type='default' className='mr-1' icon={<EditOutlined />} />
             <Popconfirm
                 title='Удалить эту запись?'

@@ -1,6 +1,6 @@
-export const URL_SERVER = 'http://95.83.149.6:5100/'
+// export const URL_SERVER = 'http://95.83.149.6:5100/'
 
-// export const URL_SERVER = 'http://localhost:5100/'
+export const URL_SERVER = 'http://localhost:5100/'
 
 export const DEFAULT_COLOR = '#1677FF'
 
@@ -70,4 +70,11 @@ export const notificationError = (e: any) => {
         message: NotificMes.ERROR,
         description: `${e.name}: ${e.message}`
     }
+}
+
+export enum RateValue {
+    instagram = 'instagram',
+    vkontakte = 'vkontakte',
+    telegram = 'telegram',
+    other = 'other'
 }

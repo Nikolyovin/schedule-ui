@@ -1,3 +1,4 @@
+import { RateValue } from '@/common'
 import { Color } from 'antd/es/color-picker'
 
 export interface ILoginForm {
@@ -48,6 +49,7 @@ export interface ICreateEntry {
     time: Date
     duration: number
     description: string
+    wherefrom: RateValue.instagram | RateValue.other | RateValue.telegram | RateValue.vkontakte
 }
 
 export interface IEntry {
@@ -58,6 +60,7 @@ export interface IEntry {
     time: Date
     duration: number
     description: string
+    wherefrom: RateValue.instagram | RateValue.other | RateValue.telegram | RateValue.vkontakte
 }
 
 export interface IUpdateEntry {
@@ -68,6 +71,7 @@ export interface IUpdateEntry {
     duration: number
     description: string
     updateEntryId: string
+    wherefrom: RateValue.instagram | RateValue.other | RateValue.telegram | RateValue.vkontakte
 }
 
 export interface IUpdateUser {

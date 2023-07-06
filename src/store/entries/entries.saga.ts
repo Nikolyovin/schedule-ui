@@ -58,9 +58,9 @@ function* removeEntrySuccess(): any {
 
 function* updateEntryFetch({ payload }: PayloadAction<IUpdateEntry>): any {
     try {
-        const { clientName, date, description, duration, master, time, updateEntryId } = payload
+        const { clientName, date, description, duration, master, time, updateEntryId, wherefrom } = payload
         const response = yield call(() =>
-            EntryService.update(updateEntryId, { clientName, date, description, duration, master, time })
+            EntryService.update(updateEntryId, { clientName, date, description, duration, master, time, wherefrom })
         )
         yield put(entriesActions.updateEntrySuccess())
     } catch (e: any) {
