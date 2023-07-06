@@ -42,7 +42,7 @@ const Day: FC = () => {
 
     return (
         <>
-            <Header />
+            <Header isDay />
             <div className='mobile-background  min-h-[calc(100vh-64px)]'>
                 <NotificationApp />
                 <p className='capitalize text-center pt-5 text-2xl'>{formattedDate}</p>
