@@ -11,7 +11,7 @@ interface IProps {
 }
 
 const AvatarSettings: FC<IProps> = ({ activeUserId }) => {
-    const {activeUser} = useAppSelector(state => state.login)
+    const { activeUser } = useAppSelector(state => state.login)
     const { updateAvatarUserFetch } = useActions()
     const filePicker = useRef<HTMLInputElement>(null) as MutableRefObject<HTMLInputElement>
     const { width } = useWindowSize()
@@ -29,9 +29,18 @@ const AvatarSettings: FC<IProps> = ({ activeUserId }) => {
 
     return (
         <>
-            <div className='flex justify-center 2xl:mb-5 items-end'>
-                <TheAvatar size={lgMinScreen ? 100 : 200} picture={activeUser.picture}/>
-                <Button type='primary' onClick={handlePick} shape='circle' icon={<EditOutlined />} />
+            <div onClick={handlePick} className='flex justify-center opacity-100 2xl:mb-5 items-end '>
+                <TheAvatar size={lgMinScreen ? 100 : 200} picture={activeUser.picture} />
+                {
+                    <Button
+                        type='primary'
+                        onClick={handlePick}
+                        className='md:visible md:static absolute invisible'
+                        style={{ backgroundColor: '#001529' }}
+                        shape='circle'
+                        icon={<EditOutlined />}
+                    />
+                }
             </div>
             <input
                 ref={filePicker}

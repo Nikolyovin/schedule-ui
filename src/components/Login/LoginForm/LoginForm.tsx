@@ -22,7 +22,9 @@ const LoginForm: FC = () => {
 
     const onFinish = (values: ILoginForm) => {
         if (!isLoading && users.length > 0) {
-            const login = users.find(user => user.login.toLowerCase() === values.username.toLowerCase() && user.password === values.password)
+            const login = users.find(
+                user => user.login.toLowerCase() === values.username.toLowerCase() && user.password === values.password
+            )
             if (!login) setError(true)
             if (login) {
                 setIsLoadingLogin(true)
@@ -76,6 +78,8 @@ const LoginForm: FC = () => {
                             type='primary'
                             htmlType='submit'
                             loading={isLoadingLogin}
+                            className='md:mt-0 mt-4'
+                            style={{ backgroundColor: '#001529' }}
                             // onClick={() => {
                             //   router.push({
                             //     pathname: '/',
@@ -91,6 +95,7 @@ const LoginForm: FC = () => {
                         <Button
                             type='link'
                             htmlType='button'
+                            style={{ color: '#001529' }}
                             onClick={() => {
                                 router.push({
                                     pathname: '/registration'

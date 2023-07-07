@@ -94,7 +94,7 @@ const FormSettings: FC<IProps> = ({ activeUser }) => {
 
                 <Row justify={'center'}>
                     <Form.Item wrapperCol={{ span: 18 }}>
-                        <Button type='primary' htmlType='submit'>
+                        <Button type='primary' style={{ backgroundColor: '#001529' }} htmlType='submit'>
                             Сохранить
                         </Button>
                     </Form.Item>

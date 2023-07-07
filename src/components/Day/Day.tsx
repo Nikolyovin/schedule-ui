@@ -51,7 +51,12 @@ const Day: FC = () => {
                         <Cards entries={entries} users={users} />
                     </Spin>
 
-                    <Button className='mt-5' type='primary' onClick={onOpenModal}>
+                    <Button
+                        className='mt-5'
+                        type='primary'
+                        style={{ backgroundColor: '#001529' }}
+                        onClick={onOpenModal}
+                    >
                         Добавить
                     </Button>
                     <Modal

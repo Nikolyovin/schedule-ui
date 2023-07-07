@@ -27,7 +27,7 @@ const Content = () => {
             <NotificationApp />
             <CalendarAll />
             <div className='text-center absolute bottom-3 z-10 left-[50%] -translate-x-1/2 '>
-                <Button type='primary' onClick={showModal}>
+                <Button type='primary' style={{ backgroundColor: '#001529' }} onClick={showModal}>
                     Создать
                 </Button>
             </div>

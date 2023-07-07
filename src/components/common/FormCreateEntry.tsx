@@ -141,11 +141,11 @@ const FormCreateEntry: FC<IProps> = ({ currentDay }) => {
             <Row justify={'center'}>
                 <Form.Item>
                     {isNew ? (
-                        <Button type='primary' htmlType='submit'>
+                        <Button type='primary' style={{ backgroundColor: '#001529' }} htmlType='submit'>
                             Создать
                         </Button>
                     ) : (
-                        <Button type='primary' htmlType='submit'>
+                        <Button type='primary' style={{ backgroundColor: '#001529' }} htmlType='submit'>
                             Изменить
                         </Button>
                     )}

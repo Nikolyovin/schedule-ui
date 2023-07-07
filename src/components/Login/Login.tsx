@@ -9,7 +9,7 @@ const Login: FC = () => {
     return (
         <div className='mobile-background h-[100vh] w-[100%] flex justify-center  items-center md:bg-slate-50'>
             {/* <NotificationApp /> */}
-            <Card title={'Вход'}>
+            <Card title={'Вход'} className='opacity-90'>
                 <LoginForm />
             </Card>
         </div>

@@ -133,7 +133,16 @@ const RegistrationForm: FC = () => {
 
                 <Row justify={'center'}>
                     <Form.Item wrapperCol={{ span: 18 }}>
-                        <Button disabled={CheckForDuplicateLogin()} type='primary' htmlType='submit'>
+                        <Button
+                            disabled={CheckForDuplicateLogin()}
+                            style={
+                                CheckForDuplicateLogin()
+                                    ? { backgroundColor: '#efefef' }
+                                    : { backgroundColor: '#001529' }
+                            }
+                            type='primary'
+                            htmlType='submit'
+                        >
                             Зарегистрироваться
                         </Button>
                     </Form.Item>

@@ -25,8 +25,7 @@ const Settings = () => {
     const xlScreen = width > 1366
     const smScreen = width < 641
 
-    console.log(lgScreen, xlScreen, smScreen);
-    
+    console.log(lgScreen, xlScreen, smScreen)
 
     const styleCard = () => {
         if (lgScreen) return { width: 500, maxHeight: 650 }
@@ -38,7 +37,7 @@ const Settings = () => {
         <>
             <Header />
             <div className='mobile-background min-h-[calc(100vh-var(--header-height))] w-[100%] flex justify-center items-center  md:bg-slate-50'>
-                <Card title='Мои настройки' style={styleCard()}>
+                <Card title='Мои настройки' className='opacity-90' style={styleCard()}>
                     <AvatarSettings activeUserId={activeUser._id} />
                     <FormSettings activeUser={activeUser} />
                 </Card>

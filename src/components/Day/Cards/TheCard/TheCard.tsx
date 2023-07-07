@@ -35,10 +35,10 @@ const TheCard: FC<IProps> = ({ entry, master }) => {
     return (
         <Card
             headStyle={{ backgroundColor: master.color, border: 0 }}
-            className='md:w-[800px] w-[300px] mt-3'
+            className='md:w-[800px] w-[300px] mt-3 md:opacity-100 opacity-90'
             cover={<HeaderCard master={master} />}
         >
-            <div className='md:flex 2xl:mb-1'>
+            <div className='md:flex 2xl:mb-1 bg-opacity-50'>
                 <p className='text-lg text-sm'>
                     Начало сеанса:
                     <span className='2xl:text-2xl text-sm font-medium'> {moment(entry.time).format('HH:mm')}; </span>
